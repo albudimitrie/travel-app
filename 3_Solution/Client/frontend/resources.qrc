@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>assets/poza_back.jpg</file>
+        <file>assets/images.png</file>
+        <file>assets/d3ecbzg-045f95bb-8610-4dbb-84ab-e1d08fb037d7.jpg</file>
+        <file>assets/blue.png</file>
+    </qresource>
+</RCC>
