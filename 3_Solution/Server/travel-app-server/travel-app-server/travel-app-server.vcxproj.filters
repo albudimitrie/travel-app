@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\HANDLERS">
+      <UniqueIdentifier>{e54d5375-03be-421f-8435-bb64fa3bcf94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\REPOS">
+      <UniqueIdentifier>{98b77c50-7dfd-468e-8180-db8ebe8fa120}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,12 +30,69 @@
     <ClCompile Include="TCPServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="iRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="json_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandlerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrentUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataBaseCon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TCPServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlerManager.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="iHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="iRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+    <ClInclude Include="UserRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

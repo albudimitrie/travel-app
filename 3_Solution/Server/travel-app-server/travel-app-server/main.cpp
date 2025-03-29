@@ -21,12 +21,12 @@ void main()
 {
 	try
 	{
-		DataBaseCon* db = DataBaseCon::getInstance();
-		if (db->connect("ALBUU\\SQLEXPRESS", "TravelApp"))
+	DataBaseCon* db = DataBaseCon::getInstance();
+			if (db->connect("ALBUU\\SQLEXPRESS", "TravelApp"))
 		{
-			std::vector<std::vector<std::string>> results;
+			/*std::vector<std::vector<std::string>> results;
 			db->executeQuery("SELECT * FROM Users", results);
-		/*	for (int i = 0; i < results.size(); i++)
+			for (int i = 0; i < results.size(); i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
@@ -36,18 +36,18 @@ void main()
 			}*/
 		}
 
-		//TCPServer server(12345);
-		//server.run();
-		json j;
-		j["nume"] = "Ion";
-		j["varsta"] = 25;
 
-		std::cout << "JSON serializat: " << j.dump(4) << std::endl;
+
+		TCPServer server(12345);
+		server.run();
 		
 
 	}
 	catch (...)
 	{
+
+
+
 		std::cout << "Eroare\n";
 	}
 

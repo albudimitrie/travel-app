@@ -13,6 +13,11 @@
 #include <stdio.h>
 #include <string>
 #include <cstring>
+#include "include\json.hpp"
+#include "HandlerManager.h"
+#include "iHandler.h"
+
+using json = nlohmann::json;
 
 class TCPServer {
 private:
@@ -111,7 +116,7 @@ public:
         
         if (bytes_received > 0) {
             recv_buffer[bytes_received] = '\0';
-            printf("Received: %s\n", recv_buffer);
+            //printf("Received: %s\n", recv_buffer);
             return std::string(recv_buffer);
         }
         else if (bytes_received == 0) {
@@ -157,18 +162,34 @@ public:
 
     void run()
     {
+        HandlerManager handlers;
+        handlers.addHandler(FactoryHandlers::makeLoginHandler());
+        handlers.addHandler(FactoryHandlers::makeRegisterHandler());
+
         if (!start_listening()) {
             return;
         }
-        if (accept_connection()) {
-            while (true) {
-                std::string received =receive_data();
-                std::cout << received << "\n";
-                if (received.empty()) {
-                    break;
+        while(true)
+        {
+            if (accept_connection()) {
+                while (true) {
+                    std::string received = receive_data();
+                    if (received.empty()) {
+                        printf("Client disconnected. Waiting for a new connection...\n");
+                        closesocket(client_sock);
+                        client_sock = INVALID_SOCKET;
+                        break;
+                    }
+                    json j_received = json::parse(received);
+                    json reply = handlers.processRequest(j_received);
+
+
+                    std::string str_reply = reply.dump();
+                    send_data(str_reply.c_str());
                 }
-                send_data(received.c_str());
             }
         }
+       
+ 
     }
 };

@@ -40,7 +40,7 @@ void MainWindow::on_pushButton_clicked()
 
     sock->sendMessage(username);
 
-    qDebug()<<username<<password;
+    //qDebug()<<username<<password;
 
     delete []username;
     delete []password;

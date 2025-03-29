@@ -128,13 +128,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AHandler.cpp" />
+    <ClCompile Include="CurrentUser.cpp" />
     <ClCompile Include="DataBaseCon.cpp" />
+    <ClCompile Include="HandlerManager.cpp" />
+    <ClCompile Include="iHandler.cpp" />
+    <ClCompile Include="iRepository.cpp" />
+    <ClCompile Include="json_test.cpp" />
+    <ClCompile Include="LoginHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RegisterHandler.cpp" />
     <ClCompile Include="TCPServer.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="UserRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AHandler.h" />
+    <ClInclude Include="CurrentUser.h" />
     <ClInclude Include="DataBaseCon.h" />
+    <ClInclude Include="HandlerManager.h" />
+    <ClInclude Include="iHandler.h" />
+    <ClInclude Include="iRepository.h" />
+    <ClInclude Include="LoginHandler.h" />
+    <ClInclude Include="RegisterHandler.h" />
     <ClInclude Include="TCPServer.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="UserRepository.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
