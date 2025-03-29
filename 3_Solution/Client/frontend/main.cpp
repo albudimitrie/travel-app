@@ -6,14 +6,12 @@
 
 int main(int argc, char *argv[])
 {
-    //Socket* socket = Socket::getInstance();
-    //socket->sendMessage("A MERS\n");
-    //socket->sendMessage("A MERS2\n");
-
+  //  Socket* socket = Socket::getInstance();
 
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+
 
 
     return a.exec();

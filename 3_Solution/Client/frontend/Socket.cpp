@@ -1,6 +1,8 @@
 #include "Socket.h"
 #include <iostream>
 #include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 Socket* Socket::instance=nullptr;
 
@@ -26,7 +28,7 @@ Socket::Socket() {
 
     // Configurare adresă server
     clientService.sin_family = AF_INET;
-    inet_pton(AF_INET, "10.10.25.60", &clientService.sin_addr.s_addr);
+    inet_pton(AF_INET, "172.16.4.190", &clientService.sin_addr.s_addr);
     clientService.sin_port = htons(12345);
 
     // Conectare la server
@@ -51,7 +53,16 @@ void Socket::sendMessage(const char* message) {
 }
 
 void Socket::receiveMessage() {
-    char buffer[1024] = {0};
-    recv(client_sock, buffer, 1024, 0);
+     char buffer[1024] = {0};
+     recv(client_sock, buffer, 1024, 0);
+
+     QJsonDocument jsonDoc = QJsonDocument::fromJson(buffer);
+
+     QJsonObject jsonObj = jsonDoc.object();
+
+     qDebug() << "Server JSON:" << jsonObj;
+
      qDebug()<<"Server: "<<buffer<<" .\n";
+
+
 }

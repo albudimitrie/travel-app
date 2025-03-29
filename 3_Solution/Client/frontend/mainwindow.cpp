@@ -5,7 +5,9 @@
 #include <QString>
 #include"Socket.h"
 #include<QString>
-//#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include "registerwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,32 +18,46 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(ui->groupBox, 0, Qt::AlignCenter);
     ui->centralwidget->setLayout(layout);
 
-    ui->groupBox->setMinimumSize(700, 400);  // Setează dimensiunea minimă
+    ui->groupBox->setMinimumSize(700, 400);  // Set MINIMUM Dimension
     ui->groupBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 MainWindow::~MainWindow()
 {
+    if(registerWin)
+    {
+        delete registerWin;
+    }
     delete ui;
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    char* username = new char[ui->lineEdit->text().size()+1];
-    char* password = new char[ui->lineEdit_2->text().size()+1];
+    QJsonObject jsonObj;
+    jsonObj["action"]="LOG_IN";
+    jsonObj["username"] = ui->lineEdit->text();
+    jsonObj["password"] = ui->lineEdit_2->text();
 
-    strcpy(username,ui->lineEdit->text().toStdString().c_str());
-    strcpy(password,ui->lineEdit_2->text().toStdString().c_str());
+    QJsonDocument jsonDoc(jsonObj);
 
+    QByteArray jsonData = jsonDoc.toJson();
 
     Socket* sock = Socket::getInstance();
-    strcat(username,"_");
-    strcat(username,password);
+    sock->sendMessage(jsonData);
 
-    sock->sendMessage(username);
+    sock->receiveMessage();
 
-    //qDebug()<<username<<password;
+}
 
-    delete []username;
-    delete []password;
+void MainWindow::on_pushButton_2_clicked()
+{
+    // If !registerWin -> create registerWin.
+    if (!registerWin) {
+        registerWin = new registerWindow();
+        //Connecting the back signal -> show login window
+        connect(registerWin, &registerWindow::backToLogin, this, &MainWindow::show);
+    }
+
+    registerWin->show(); // Show register window.
+    this->hide();        // Hide current window(login)
 }

@@ -11,14 +11,17 @@ CONFIG += c++17
 SOURCES += \
     Socket.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    registerwindow.cpp
 
 HEADERS += \
     Socket.h \
-    mainwindow.h
+    mainwindow.h \
+    registerwindow.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    registerwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
