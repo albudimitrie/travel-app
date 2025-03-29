@@ -1,9 +1,20 @@
 #include "UserRepository.h"
+#include "User.h"
 
 void UserRepository::create(const User& obj)
 {
+	std::string query = "INSERT INTO Users(username, password) VALUES (" + obj.getUsername() + "," + obj.getPassword() + ");";
+	SQLHSTMT stmt;
+	SQLRETURN ret;
 
+	ret = SQLAllocHandle(SQL_HANDLE_STMT, _db->getDBC(), &stmt);
 
+	ret = SQLExecDirectA(stmt, (SQLCHAR*)query.c_str(), SQL_NTS);
+
+	if (!SQL_SUCCEEDED(ret)) {
+		SQLFreeHandle(SQL_HANDLE_STMT, stmt);
+		throw 1;
+	}
 
 
 

@@ -4,7 +4,7 @@ CurrentUser* CurrentUser::instance = nullptr;
 
 CurrentUser* CurrentUser::getInstance()
 {
-	if (instance)
+	if (!instance)
 	{
 		instance = new CurrentUser;
     }

@@ -16,7 +16,7 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 	json reply;
 	UserRepository users;
 	std::string username, password;
-	User* user;
+	User* user = nullptr;
 
 
 	username = request["username"];
@@ -45,7 +45,11 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 
 		}
 	}
+	else
+	{
+		reply["status"] = "unsuccesful";
+	}
 	
-	//CurrentUser::getInstance()->setActive(user);
+	CurrentUser::getInstance()->setActive(user);
 	return reply;
 }

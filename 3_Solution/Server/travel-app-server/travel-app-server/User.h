@@ -16,6 +16,7 @@ public:
 
 	bool admin() const { return _isAdmin; }
 	std::string getUsername()const { return _username; }
+	std::string getPassword()const { return _password; }
 
 };
 

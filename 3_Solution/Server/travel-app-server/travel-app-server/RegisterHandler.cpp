@@ -5,6 +5,8 @@
 #include "User.h"
 #include "UserRepository.h"
 
+#include <iostream>
+
 
 using json = nlohmann::json;
 
@@ -28,8 +30,19 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 	}
 	else
 	{
+		reply["status"] = "succesful";
+		User* user = new User{ username, password, false };
+		try
+		{
+			users.create(*user);
+		}
+		catch (...)
+		{
+			std::cout << "Eroare creare user in BD\n";
+		}
+
 
 	}
 
-	return json{};
+	return reply;
 }
