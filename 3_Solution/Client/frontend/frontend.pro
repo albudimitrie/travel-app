@@ -10,12 +10,18 @@ CONFIG += c++17
 
 SOURCES += \
     Socket.cpp \
+    factoryrequest.cpp \
+    irequest.cpp \
+    loginrequest.cpp \
     main.cpp \
     mainwindow.cpp \
     registerwindow.cpp
 
 HEADERS += \
     Socket.h \
+    factoryrequest.h \
+    irequest.h \
+    loginrequest.h \
     mainwindow.h \
     registerwindow.h
 

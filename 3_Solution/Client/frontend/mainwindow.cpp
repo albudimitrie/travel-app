@@ -8,6 +8,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "registerwindow.h"
+#include"factoryrequest.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -33,17 +34,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QJsonObject jsonObj;
-    jsonObj["action"]="LOG_IN";
-    jsonObj["username"] = ui->lineEdit->text();
-    jsonObj["password"] = ui->lineEdit_2->text();
-
-    QJsonDocument jsonDoc(jsonObj);
-
-    QByteArray jsonData = jsonDoc.toJson();
+    IRequest *logReq = FactoryRequest::loginReq(ui->lineEdit->text(),ui->lineEdit_2->text());
 
     Socket* sock = Socket::getInstance();
-    sock->sendMessage(jsonData);
+
+    qDebug() << logReq->getRequest();
+
+    sock->sendMessage(logReq->getRequest());
 
     sock->receiveMessage();
 
