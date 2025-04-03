@@ -24,7 +24,7 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 	username = request["username"];
 	password = request["password"];
 
-	if (!users.isUsernameTaken(username))
+	if (users.isUsernameTaken(username))
 	{
 		reply["status"] = "unsuccesful";
 	}

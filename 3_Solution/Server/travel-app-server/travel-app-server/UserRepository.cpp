@@ -3,7 +3,7 @@
 
 void UserRepository::create(const User& obj)
 {
-	std::string query = "INSERT INTO Users(username, password) VALUES (" + obj.getUsername() + "," + obj.getPassword() + ");";
+	std::string query = "INSERT INTO Users(username, password) VALUES ('" + obj.getUsername() + "','" + obj.getPassword() + "');";
 	SQLHSTMT stmt;
 	SQLRETURN ret;
 

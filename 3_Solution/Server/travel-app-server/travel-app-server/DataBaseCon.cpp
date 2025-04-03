@@ -155,20 +155,15 @@ bool DataBaseCon::insert(std::string query, std::vector<std::vector<std::string>
     for (const auto& row : toInsert) {
         std::string finalQuery = query;
 
-        // Înlocuim placeholderii (dacă există) cu valorile actuale
-        // Pentru SQL Server, parametrii sunt marcați ca ?
         for (const auto& value : row) {
             size_t pos = finalQuery.find("?");
             if (pos != std::string::npos) {
-                // Escapăm ghilimelele simple pentru a preveni injecții SQL
                 std::string escapedValue = value;
                 size_t valuePos = 0;
                 while ((valuePos = escapedValue.find("'", valuePos)) != std::string::npos) {
                     escapedValue.replace(valuePos, 1, "''");
                     valuePos += 2;
                 }
-
-                // Înlocuim placeholder-ul cu valoarea escapată
                 finalQuery.replace(pos, 1, "'" + escapedValue + "'");
             }
         }
@@ -176,12 +171,10 @@ bool DataBaseCon::insert(std::string query, std::vector<std::vector<std::string>
         SQLHSTMT hStmt;
         SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
 
-        // Conversie la SQLWCHAR pentru SQL Server
         int len = MultiByteToWideChar(CP_ACP, 0, finalQuery.c_str(), -1, NULL, 0);
         SQLWCHAR* wFinalQuery = new SQLWCHAR[len];
         MultiByteToWideChar(CP_ACP, 0, finalQuery.c_str(), -1, wFinalQuery, len);
 
-        // Executăm query-ul
         SQLRETURN ret = SQLExecDirectW(hStmt, wFinalQuery, SQL_NTS);
         delete[] wFinalQuery;
 
@@ -200,7 +193,6 @@ bool DataBaseCon::insert(std::string query, std::vector<std::vector<std::string>
             allSuccessful = false;
         }
 
-        // Eliberăm handle-ul pentru statement
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
     }
 
