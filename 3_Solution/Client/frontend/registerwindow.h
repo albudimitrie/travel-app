@@ -23,8 +23,11 @@ private slots:
 
     void on_pushButton_2_clicked(); // Button for 'go back to login'
 
+    void on_toolButton_clicked(); //EYE Pass
+
 private:
     Ui::registerWindow *ui;
+    bool isPasswordVisible = false;
 };
 
 #endif // REGISTERWINDOW_H

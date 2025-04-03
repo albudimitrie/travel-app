@@ -10,22 +10,27 @@ CONFIG += c++17
 
 SOURCES += \
     Socket.cpp \
+    clientwindow.cpp \
     factoryrequest.cpp \
     irequest.cpp \
     loginrequest.cpp \
     main.cpp \
     mainwindow.cpp \
+    registerrequest.cpp \
     registerwindow.cpp
 
 HEADERS += \
     Socket.h \
+    clientwindow.h \
     factoryrequest.h \
     irequest.h \
     loginrequest.h \
     mainwindow.h \
+    registerrequest.h \
     registerwindow.h
 
 FORMS += \
+    clientwindow.ui \
     mainwindow.ui \
     registerwindow.ui
 

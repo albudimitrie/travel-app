@@ -1,14 +1,14 @@
-#include "loginrequest.h"
+#include "registerrequest.h"
 
-LoginRequest::LoginRequest(QString username,QString password) {
+RegisterRequest::RegisterRequest(QString username,QString password) {
     this->username=username;
     this->password=password;
 }
 
-QByteArray LoginRequest::getRequest()
+QByteArray RegisterRequest::getRequest()
 {
     QJsonObject jsonObj;
-    jsonObj["action"]="LOG_IN";
+    jsonObj["action"]="REGISTER";
     jsonObj["username"] = username;
     jsonObj["password"] = password;
 

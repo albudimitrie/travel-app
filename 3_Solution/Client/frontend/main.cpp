@@ -6,9 +6,10 @@
 
 int main(int argc, char *argv[])
 {
-  //  Socket* socket = Socket::getInstance();
+    Socket* socket = Socket::getInstance();
 
     QApplication a(argc, argv);
+    a.setWindowIcon(QIcon(":/images/assets/travel.png"));
     MainWindow w;
     w.show();
 

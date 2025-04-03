@@ -21,6 +21,25 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->groupBox->setMinimumSize(700, 400);  // Set MINIMUM Dimension
     ui->groupBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+
+    QPixmap pixmap(":/images/assets/closed.png");
+    //qDebug() << "Dimensiunea imaginii:" << pixmap.size();
+    if (pixmap.isNull()) {
+        qDebug() << "Eroare: Imaginea nu a fost încărcată!";
+    } else {
+        ui->toolButton->setIcon(QIcon(pixmap));
+        ui->toolButton->setIconSize(QSize(24, 24));
+        ui->toolButton->setFixedSize(30, 30);
+    }
+    //ui->toolButton->setAutoRaise(true);
+    ui->toolButton->setStyleSheet(
+        "QToolButton { background-color: transparent; border: none; }"
+        "QToolButton:hover { background-color: rgba(200, 200, 200, 30); }"
+        "QToolButton:pressed { background-color: rgba(180, 180, 180, 50); }"
+        );
+    //ui->toolButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 }
 
 MainWindow::~MainWindow()
@@ -58,3 +77,12 @@ void MainWindow::on_pushButton_2_clicked()
     registerWin->show(); // Show register window.
     this->hide();        // Hide current window(login)
 }
+
+void MainWindow::on_toolButton_clicked()
+{
+    isPasswordVisible = !isPasswordVisible;
+    QPixmap pixmap(isPasswordVisible ? ":/images/assets/opened.png" : ":/images/assets/closed.png");
+    ui->toolButton->setIcon(QIcon(pixmap));
+    ui->lineEdit_2->setEchoMode(isPasswordVisible ? QLineEdit::Normal : QLineEdit::Password);
+}
+

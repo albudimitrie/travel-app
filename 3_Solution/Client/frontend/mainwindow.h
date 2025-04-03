@@ -19,12 +19,16 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_clicked(); //login
 
     void on_pushButton_2_clicked(); // REGISTER BUTTON
+
+    void on_toolButton_clicked(); //EYE Pass
 
 private:
     Ui::MainWindow *ui;
     registerWindow *registerWin = nullptr; // Instance for reigster window
+    bool isPasswordVisible = false;
+
 };
 #endif // MAINWINDOW_H

@@ -1,6 +1,8 @@
 #ifndef IREQUEST_H
 #define IREQUEST_H
 #include<QString>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 class IRequest
 {

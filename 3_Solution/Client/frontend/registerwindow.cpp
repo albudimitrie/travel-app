@@ -2,6 +2,8 @@
 #include "ui_registerwindow.h"
 #include <QVBoxLayout>
 #include <QLayout>
+#include "factoryrequest.h"
+#include "Socket.h"
 
 registerWindow::registerWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,6 +16,27 @@ registerWindow::registerWindow(QWidget *parent)
 
     ui->groupBox->setMinimumSize(700, 400);  // Set MINIMUM Dimension
     ui->groupBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+
+    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+
+    QPixmap pixmap(":/images/assets/closed.png");
+    //qDebug() << "Dimensiunea imaginii:" << pixmap.size();
+    if (pixmap.isNull()) {
+        qDebug() << "Eroare: Imaginea nu a fost încărcată!";
+    } else {
+        ui->toolButton->setIcon(QIcon(pixmap));
+        ui->toolButton->setIconSize(QSize(24, 24));
+        ui->toolButton->setFixedSize(30, 30);
+    }
+    //ui->toolButton->setAutoRaise(true);
+    ui->toolButton->setStyleSheet(
+        "QToolButton { background-color: transparent; border: none; }"
+        "QToolButton:hover { background-color: rgba(200, 200, 200, 30); }"
+        "QToolButton:pressed { background-color: rgba(180, 180, 180, 50); }"
+        );
+    //ui->toolButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
 }
 
 registerWindow::~registerWindow()
@@ -23,13 +46,31 @@ registerWindow::~registerWindow()
 
 void registerWindow::on_pushButton_clicked()
 {
-    this->hide();       // Hide register window
-    emit backToLogin(); // emit the signal to notify the login window to display
+   // this->hide();       // Hide register window
+   // emit backToLogin(); // emit the signal to notify the login window to display
+    IRequest *regReq = FactoryRequest::registerReq(ui->lineEdit->text(),ui->lineEdit_2->text());
+
+    Socket* sock = Socket::getInstance();
+
+    qDebug() << regReq->getRequest();
+
+    sock->sendMessage(regReq->getRequest());
+
+    sock->receiveMessage();
 }
 
 void registerWindow::on_pushButton_2_clicked()
 {
     this->hide();       // Hide register WINDOW
     emit backToLogin(); // emit the signal to notify the login window to display
+}
+
+
+void registerWindow::on_toolButton_clicked()
+{
+    isPasswordVisible = !isPasswordVisible;
+    QPixmap pixmap(isPasswordVisible ? ":/images/assets/opened.png" : ":/images/assets/closed.png");
+    ui->toolButton->setIcon(QIcon(pixmap));
+    ui->lineEdit_2->setEchoMode(isPasswordVisible ? QLineEdit::Normal : QLineEdit::Password);
 }
 
