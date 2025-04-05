@@ -10,5 +10,6 @@
         <file>assets/opened.png</file>
         <file>assets/travel.png</file>
         <file>assets/LOGO.png</file>
+        <file>assets/clientMAIN.png</file>
     </qresource>
 </RCC>

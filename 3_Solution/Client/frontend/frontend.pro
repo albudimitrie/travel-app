@@ -14,6 +14,7 @@ SOURCES += \
     factoryrequest.cpp \
     irequest.cpp \
     loginrequest.cpp \
+    logoutrequest.cpp \
     main.cpp \
     mainwindow.cpp \
     registerrequest.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     factoryrequest.h \
     irequest.h \
     loginrequest.h \
+    logoutrequest.h \
     mainwindow.h \
     registerrequest.h \
     registerwindow.h

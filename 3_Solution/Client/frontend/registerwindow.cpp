@@ -4,6 +4,8 @@
 #include <QLayout>
 #include "factoryrequest.h"
 #include "Socket.h"
+#include <QTimer>
+#include"QPropertyAnimation"
 
 registerWindow::registerWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,7 +29,7 @@ registerWindow::registerWindow(QWidget *parent)
     } else {
         ui->toolButton->setIcon(QIcon(pixmap));
         ui->toolButton->setIconSize(QSize(24, 24));
-        ui->toolButton->setFixedSize(30, 30);
+        ui->toolButton->setFixedSize(30, 35);
     }
     //ui->toolButton->setAutoRaise(true);
     ui->toolButton->setStyleSheet(
@@ -56,7 +58,31 @@ void registerWindow::on_pushButton_clicked()
 
     sock->sendMessage(regReq->getRequest());
 
-    sock->receiveMessage();
+    QJsonObject obj=sock->receiveMessage();
+
+    if(obj["status"]=="succesful")
+    {
+        ui->label_3->setText("Registration successful!");
+        ui->label_3->setStyleSheet("color: green;");
+        ui->label_3->setVisible(true);
+
+        QTimer::singleShot(3000, this, [=](){
+         ui->label_3->setVisible(false);
+            this->hide();       // Hide register WINDOW
+            emit backToLogin(); // emit the signal to notify the login window to display
+        });
+    }
+    else
+    {
+        ui->label_3->setText("Username taken . Please try other username!");
+        ui->label_3->setStyleSheet("color: red;");
+        ui->label_3->setVisible(true);
+
+        QTimer::singleShot(3000, this, [=](){
+         ui->label_3->setVisible(false);
+        });
+    }
+
 }
 
 void registerWindow::on_pushButton_2_clicked()

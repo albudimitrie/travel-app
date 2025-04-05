@@ -9,6 +9,9 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <stdio.h>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 
 class Socket {
 private:
@@ -22,7 +25,7 @@ private:
 public:
     static Socket* getInstance();
     void sendMessage(const char* message);
-    void receiveMessage();
+    QJsonObject receiveMessage();
 };
 
 #endif // SOCKET_H

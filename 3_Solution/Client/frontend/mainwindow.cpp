@@ -9,6 +9,9 @@
 #include <QJsonObject>
 #include "registerwindow.h"
 #include"factoryrequest.h"
+#include"clientwindow.h"
+#include <QTimer>
+#include <qpropertyanimation.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     } else {
         ui->toolButton->setIcon(QIcon(pixmap));
         ui->toolButton->setIconSize(QSize(24, 24));
-        ui->toolButton->setFixedSize(30, 30);
+        ui->toolButton->setFixedSize(30, 35);
     }
     //ui->toolButton->setAutoRaise(true);
     ui->toolButton->setStyleSheet(
@@ -53,7 +56,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    IRequest *logReq = FactoryRequest::loginReq(ui->lineEdit->text(),ui->lineEdit_2->text());
+    QString username = ui->lineEdit->text();
+    QString password = ui->lineEdit_2->text();
+
+    IRequest *logReq = FactoryRequest::loginReq(username,password);
 
     Socket* sock = Socket::getInstance();
 
@@ -61,7 +67,36 @@ void MainWindow::on_pushButton_clicked()
 
     sock->sendMessage(logReq->getRequest());
 
-    sock->receiveMessage();
+    QJsonObject obj = sock->receiveMessage();
+
+     //Verify with server
+    if (obj["status"]=="succesful")
+    {
+        //Create and open client window
+        clientWindow *clientWin = new clientWindow(nullptr,username);
+        connect(clientWin, &clientWindow::backToLogin, this, &MainWindow::show);
+        QPropertyAnimation *animation = new QPropertyAnimation(clientWin, "windowOpacity");
+        animation->setDuration(800);
+        animation->setStartValue(0.0);
+        animation->setEndValue(1.0);
+        animation->setEasingCurve(QEasingCurve::InOutCubic);
+        animation->start();
+
+        clientWin->show();
+        this->close(); // închide fereastra de login
+    }
+    else
+    {
+        ui->label_4->setText("Login Failed . Invalid username or password.");
+        ui->label_4->setStyleSheet("color: red;");
+        ui->label_4->setVisible(true);
+
+        // Hide the message after 3s
+        QTimer::singleShot(3000, this, [=](){
+            ui->label_4->setVisible(false);
+
+        });
+    }
 
 }
 
@@ -72,6 +107,7 @@ void MainWindow::on_pushButton_2_clicked()
         registerWin = new registerWindow();
         //Connecting the back signal -> show login window
         connect(registerWin, &registerWindow::backToLogin, this, &MainWindow::show);
+
     }
 
     registerWin->show(); // Show register window.

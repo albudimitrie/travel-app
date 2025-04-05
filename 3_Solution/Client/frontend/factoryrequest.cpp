@@ -9,3 +9,8 @@ IRequest* FactoryRequest::registerReq(QString username,QString password)
 {
     return new RegisterRequest(username,password);
 }
+
+IRequest* FactoryRequest::logoutReq(QString username)
+{
+    return new LogoutRequest(username);
+}
