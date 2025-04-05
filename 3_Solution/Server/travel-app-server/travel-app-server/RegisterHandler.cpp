@@ -27,6 +27,8 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 	if (users.isUsernameTaken(username))
 	{
 		reply["status"] = "unsuccesful";
+		std::string log = "Register failed[" + username + ":" + password + "]";
+		Logger::getInstance()->logResponse(LogStatus::ERROR_, log);
 	}
 	else
 	{
@@ -40,6 +42,8 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 		{
 			std::cout << "Eroare creare user in BD\n";
 		}
+		std::string log = "Register with succes[" + username  + "]";
+		Logger::getInstance()->logResponse(LogStatus::SUCCES, log);
 
 
 	}

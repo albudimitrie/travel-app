@@ -6,6 +6,7 @@
 
 class LoginHandler;
 class RegisterHandler;
+class LogoutHandler;
 
 
 class iHandler
@@ -28,5 +29,7 @@ class FactoryHandlers
 public:
 	static iHandler* makeLoginHandler();
 	static iHandler* makeRegisterHandler();
+	static iHandler* makeLogoutHandler();
+
 };
 

@@ -1,6 +1,7 @@
 #include "HandlerManager.h"
 #include "iHandler.h"
 #include "include/json.hpp"
+#include "Logger.h"
 
 void HandlerManager::addHandler(iHandler* handler)
 {
@@ -19,6 +20,7 @@ nlohmann::json HandlerManager::processRequest(nlohmann::json& request)
 	if (!worker)
 	{
 		throw 1;
+		Logger::getInstance()->logResponse(LogStatus::ERROR_, "Request not recognized");
 	}
 	return worker->handle(request);
 }

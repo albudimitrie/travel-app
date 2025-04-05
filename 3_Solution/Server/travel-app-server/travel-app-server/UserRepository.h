@@ -22,6 +22,9 @@ public:
 	bool isAdmin(const std::string& username, const std::string& password);
 	bool isUsernameTaken(const std::string& username);
 
+	void addNewSearch(const std::string& username, const std::string& content);
+	std::vector<std::string> getLatestSearches(const std::string& username);
+
 
 
 

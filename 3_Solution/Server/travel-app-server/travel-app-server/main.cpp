@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 #include "include\json.hpp"
+#include "Logger.h"
+#include "UserRepository.h"
 
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
@@ -22,32 +24,20 @@ void main()
 	try
 	{
 	DataBaseCon* db = DataBaseCon::getInstance();
-			if (db->connect("ALBUU\\SQLEXPRESS", "TravelApp"))
-		{
-			/*std::vector<std::vector<std::string>> results;
-			db->executeQuery("SELECT * FROM Users", results);
-			for (int i = 0; i < results.size(); i++)
-			{
-				for (int j = 0; j < 3; j++)
-				{
-					std::cout << results[i][j] << " ";
-				}
-				std::cout << "\n";
-			}*/
-		}
+	db->connect("ALBUU\\SQLEXPRESS", "TravelApp");
+	Logger::getInstance()->setPath("LOGS.txt");
 
 
 
-		TCPServer server(12345);
-		server.run();
+	TCPServer server(12345);
+	server.run();
+
+
 		
 
 	}
 	catch (...)
 	{
-
-
-
 		std::cout << "Eroare\n";
 	}
 

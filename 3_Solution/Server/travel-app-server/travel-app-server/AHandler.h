@@ -1,5 +1,6 @@
 #pragma once
 #include "iHandler.h"
+#include "Logger.h"
 class AHandler :    public iHandler
 {
 protected:

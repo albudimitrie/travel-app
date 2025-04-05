@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "DataBaseCon.h"
+#include "Logger.h"
 
 
 class Filter;

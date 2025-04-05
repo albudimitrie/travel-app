@@ -30,7 +30,7 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 
 	if (users.userExists(username, password))
 	{
-		reply["status"] = "succes";
+		reply["status"] = "succesful";
 		reply["username"] = username;
 
 		if (users.isAdmin(username, password))
@@ -44,12 +44,15 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 			user = new User{ username, password, false };
 
 		}
+		CurrentUser::getInstance()->setActive(user);
+		std::string log = "Login with succes[" + username + "]";
+		Logger::getInstance()->logResponse(LogStatus::SUCCES, log);
 	}
 	else
 	{
 		reply["status"] = "unsuccesful";
+		std::string log = "Login failed[" + username + ":" + password + "]";
+		Logger::getInstance()->logResponse(LogStatus::ERROR_, log);
 	}
-	
-	CurrentUser::getInstance()->setActive(user);
 	return reply;
 }

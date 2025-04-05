@@ -1,5 +1,6 @@
 ﻿#include "DataBaseCon.h"
 #include <iostream>
+#include "Logger.h"
 
 DataBaseCon* DataBaseCon::_instance = nullptr;
 
@@ -65,6 +66,8 @@ bool DataBaseCon::connect(const std::string& serverName, const std::string& dbNa
 
         std::wcerr << L"Eroare conectare SQL: " << sqlState
             << L" (cod " << nativeError << L"): " << message << std::endl;
+        
+        Logger::getInstance()->logDBActions(LogStatus::ERROR_, "Eroare conectare SQL");
 
         return false;
     }
@@ -115,6 +118,8 @@ bool DataBaseCon::executeQuery(std::string query, std::vector<std::vector<std::s
 
         std::cerr << L"Eroare executie SQL: " << sqlState
             <<" (cod " << nativeError <<"): " << message << std::endl;
+
+
 
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
