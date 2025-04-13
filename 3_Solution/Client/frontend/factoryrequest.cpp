@@ -14,3 +14,8 @@ IRequest* FactoryRequest::logoutReq(QString username)
 {
     return new LogoutRequest(username);
 }
+
+IRequest* FactoryRequest::historyReq(QString username)
+{
+    return new HistoryRequest(username);
+}

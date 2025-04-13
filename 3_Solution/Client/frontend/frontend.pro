@@ -12,6 +12,7 @@ SOURCES += \
     Socket.cpp \
     clientwindow.cpp \
     factoryrequest.cpp \
+    historyrequest.cpp \
     irequest.cpp \
     loginrequest.cpp \
     logoutrequest.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     Socket.h \
     clientwindow.h \
     factoryrequest.h \
+    historyrequest.h \
     irequest.h \
     loginrequest.h \
     logoutrequest.h \

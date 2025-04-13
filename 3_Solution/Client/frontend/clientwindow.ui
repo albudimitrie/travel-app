@@ -24,10 +24,10 @@ background-position: center;
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>271</width>
-      <height>271</height>
+      <x>40</x>
+      <y>380</y>
+      <width>221</width>
+      <height>161</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -102,6 +102,62 @@ QPushButton:pressed {
     <property name="text">
      <string>LOGOUT</string>
     </property>
+   </widget>
+   <widget class="QCalendarWidget" name="calendarWidget">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>160</y>
+      <width>280</width>
+      <height>195</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="searchBar">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>50</y>
+      <width>113</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="searchButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>50</y>
+      <width>83</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>240</y>
+      <width>120</width>
+      <height>85</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>118</width>
+       <height>83</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
