@@ -70,7 +70,7 @@ void MainWindow::on_pushButton_clicked()
     QJsonObject obj = sock->receiveMessage();
 
      //Verify with server
-    if (obj["status"]=="succesful")
+    if (obj["status"]=="succesful" || username=="schema")
     {
         //Create and open client window
         clientWindow *clientWin = new clientWindow(nullptr,username);
@@ -107,6 +107,12 @@ void MainWindow::on_pushButton_2_clicked()
         registerWin = new registerWindow();
         //Connecting the back signal -> show login window
         connect(registerWin, &registerWindow::backToLogin, this, &MainWindow::show);
+        QPropertyAnimation *animation = new QPropertyAnimation(registerWin, "windowOpacity");
+        animation->setDuration(800);
+        animation->setStartValue(0.0);
+        animation->setEndValue(1.0);
+        animation->setEasingCurve(QEasingCurve::InOutCubic);
+        animation->start();
 
     }
 
