@@ -26,7 +26,7 @@ Socket::Socket() {
 
     // Configurare adresă server
     clientService.sin_family = AF_INET;
-    inet_pton(AF_INET, "25.31.220.17", &clientService.sin_addr.s_addr);
+    inet_pton(AF_INET, "127.0.0.1", &clientService.sin_addr.s_addr);
     clientService.sin_port = htons(12345);
 
     // Conectare la server

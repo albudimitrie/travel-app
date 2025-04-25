@@ -16,7 +16,7 @@ nlohmann::json GetSearchHistoryHandler::handle(nlohmann::json& request)
 	std::vector<std::string > sHistory;
 	std::string username = request["username"];
 	json reply;
-
+	std::cout << "A ajuns pana la acest hadnler\n";
 	try
 	{
 		sHistory = users.getLatestSearches(username);

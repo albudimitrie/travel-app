@@ -173,6 +173,7 @@ public:
         handlers.addHandler(FactoryHandlers::makeLoginHandler());
         handlers.addHandler(FactoryHandlers::makeRegisterHandler());
         handlers.addHandler(FactoryHandlers::makeLogoutHandler());
+        handlers.addHandler(FactoryHandlers::makeGetSearchHistoryHandler());
 
         if (!start_listening()) {
             return;

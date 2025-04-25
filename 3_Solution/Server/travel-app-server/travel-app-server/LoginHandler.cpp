@@ -3,6 +3,7 @@
 #include "UserRepository.h"
 #include "User.h"
 #include "CurrentUser.h"
+#include "utils.h"
 
 using json = nlohmann::json;
 
@@ -22,7 +23,7 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 	username = request["username"];
 	password = request["password"];
 
-	if (username.empty() || password.empty())
+	if (username.empty() || password.empty() || utils::hasIllegalLoginChars(username))
 	{
 		reply["status"] = "unsuccesful";
 		return reply;

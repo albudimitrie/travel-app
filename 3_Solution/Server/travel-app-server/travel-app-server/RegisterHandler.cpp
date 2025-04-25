@@ -4,6 +4,7 @@
 
 #include "User.h"
 #include "UserRepository.h"
+#include "utils.h"
 
 #include <iostream>
 
@@ -24,7 +25,7 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 	username = request["username"];
 	password = request["password"];
 
-	if (users.isUsernameTaken(username))
+	if (users.isUsernameTaken(username) || utils::hasIllegalLoginChars(username))
 	{
 		reply["status"] = "unsuccesful";
 		std::string log = "Register failed[" + username + ":" + password + "]";

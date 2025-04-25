@@ -128,38 +128,80 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AAccommodation.cpp" />
+    <ClCompile Include="AAttraction.cpp" />
+    <ClCompile Include="AccommodationRepository.cpp" />
     <ClCompile Include="AHandler.cpp" />
+    <ClCompile Include="Apartament.cpp" />
+    <ClCompile Include="ATransportation.cpp" />
+    <ClCompile Include="AttractionRepository.cpp" />
+    <ClCompile Include="CulturalAttraction.cpp" />
     <ClCompile Include="CurrentUser.cpp" />
     <ClCompile Include="DataBaseCon.cpp" />
+    <ClCompile Include="Destination.cpp" />
+    <ClCompile Include="DestinationRepository.cpp" />
     <ClCompile Include="GetSearchHistoryHandler.cpp" />
     <ClCompile Include="HandlerManager.cpp" />
+    <ClCompile Include="Hotel.cpp" />
+    <ClCompile Include="iAccommodation.cpp" />
+    <ClCompile Include="iAttraction.cpp" />
     <ClCompile Include="iHandler.cpp" />
     <ClCompile Include="iRepository.cpp" />
+    <ClCompile Include="iTransportation.cpp" />
     <ClCompile Include="json_test.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="LoginHandler.cpp" />
     <ClCompile Include="LogoutHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MusicalAttraction.cpp" />
+    <ClCompile Include="Pensiune.cpp" />
+    <ClCompile Include="PlaneTransport.cpp" />
     <ClCompile Include="RegisterHandler.cpp" />
+    <ClCompile Include="ReligiousAttraction.cpp" />
     <ClCompile Include="TCPServer.cpp" />
+    <ClCompile Include="TrainTransport.cpp" />
+    <ClCompile Include="TransportationRepository.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AAccommodation.h" />
+    <ClInclude Include="AAttraction.h" />
+    <ClInclude Include="AccommodationRepository.h" />
     <ClInclude Include="AHandler.h" />
+    <ClInclude Include="Apartament.h" />
+    <ClInclude Include="ATransportation.h" />
+    <ClInclude Include="AttractionRepository.h" />
+    <ClInclude Include="CulturalAttraction.h" />
     <ClInclude Include="CurrentUser.h" />
     <ClInclude Include="DataBaseCon.h" />
+    <ClInclude Include="Destination.h" />
+    <ClInclude Include="DestinationRepository.h" />
     <ClInclude Include="GetSearchHistoryHandler.h" />
     <ClInclude Include="HandlerManager.h" />
+    <ClInclude Include="Hotel.h" />
+    <ClInclude Include="iAccommodation.h" />
+    <ClInclude Include="iAttraction.h" />
     <ClInclude Include="iHandler.h" />
     <ClInclude Include="iRepository.h" />
+    <ClInclude Include="iTransportation.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoginHandler.h" />
     <ClInclude Include="LogoutHandler.h" />
+    <ClInclude Include="MusicalAttraction.h" />
+    <ClInclude Include="Pensiune.h" />
+    <ClInclude Include="PlaneTransport.h" />
     <ClInclude Include="RegisterHandler.h" />
+    <ClInclude Include="ReligiousAttraction.h" />
     <ClInclude Include="TCPServer.h" />
+    <ClInclude Include="TrainTransport.h" />
+    <ClInclude Include="TransportationRepository.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserRepository.h" />
+    <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LOGS.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

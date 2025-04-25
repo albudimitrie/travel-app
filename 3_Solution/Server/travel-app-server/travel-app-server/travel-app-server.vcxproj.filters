@@ -19,6 +19,18 @@
     <Filter Include="Header Files\REPOS">
       <UniqueIdentifier>{98b77c50-7dfd-468e-8180-db8ebe8fa120}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CAZARI">
+      <UniqueIdentifier>{cf3547d7-2277-442f-80a1-c0fd2e407041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TRANSPORT">
+      <UniqueIdentifier>{e963e509-fd0b-4169-b0c9-e78e844101c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OBIECTIVE">
+      <UniqueIdentifier>{01639bf4-291c-4730-8300-e10673dd72f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DESTINATII">
+      <UniqueIdentifier>{8ed631bd-4ed7-4d01-9c28-61c97c35b697}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +81,63 @@
     <ClCompile Include="GetSearchHistoryHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Destination.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iAccommodation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AAccommodation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iAttraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AAttraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iTransportation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ATransportation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hotel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pensiune.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Apartament.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CulturalAttraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicalAttraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReligiousAttraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneTransport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainTransport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AccommodationRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransportationRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AttractionRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DestinationRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataBaseCon.h">
@@ -113,5 +182,70 @@
     <ClInclude Include="GetSearchHistoryHandler.h">
       <Filter>Header Files\HANDLERS</Filter>
     </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iAccommodation.h">
+      <Filter>Header Files\CAZARI</Filter>
+    </ClInclude>
+    <ClInclude Include="AAccommodation.h">
+      <Filter>Header Files\CAZARI</Filter>
+    </ClInclude>
+    <ClInclude Include="iAttraction.h">
+      <Filter>Header Files\OBIECTIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="AAttraction.h">
+      <Filter>Header Files\OBIECTIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="iTransportation.h">
+      <Filter>Header Files\TRANSPORT</Filter>
+    </ClInclude>
+    <ClInclude Include="ATransportation.h">
+      <Filter>Header Files\TRANSPORT</Filter>
+    </ClInclude>
+    <ClInclude Include="Destination.h">
+      <Filter>Header Files\DESTINATII</Filter>
+    </ClInclude>
+    <ClInclude Include="Pensiune.h">
+      <Filter>Header Files\CAZARI</Filter>
+    </ClInclude>
+    <ClInclude Include="Apartament.h">
+      <Filter>Header Files\CAZARI</Filter>
+    </ClInclude>
+    <ClInclude Include="Hotel.h">
+      <Filter>Header Files\CAZARI</Filter>
+    </ClInclude>
+    <ClInclude Include="CulturalAttraction.h">
+      <Filter>Header Files\OBIECTIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicalAttraction.h">
+      <Filter>Header Files\OBIECTIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="ReligiousAttraction.h">
+      <Filter>Header Files\OBIECTIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneTransport.h">
+      <Filter>Header Files\TRANSPORT</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainTransport.h">
+      <Filter>Header Files\TRANSPORT</Filter>
+    </ClInclude>
+    <ClInclude Include="AccommodationRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+    <ClInclude Include="TransportationRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+    <ClInclude Include="AttractionRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+    <ClInclude Include="DestinationRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LOGS.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

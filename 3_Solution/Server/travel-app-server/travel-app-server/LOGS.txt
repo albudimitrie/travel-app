@@ -214,3 +214,59 @@
 [RESPONSE][SUCCES]--Login with succes[1]--
 [RESPONSE][SUCCES]--Logged out with succes--
 [RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[admin]--
+[RESPONSE][SUCCES]--Logged out with succes--
+[RESPONSE][ERROR]--Login failed[admin--:1]--
+[RESPONSE][SUCCES]--Login with succes[admin'--']--
+[RESPONSE][SUCCES]--Logged out with succes--
+[RESPONSE][SUCCES]--Login with succes[1'--']--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Logged out with succes--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[admin]--
+[RESPONSE][SUCCES]--Logged out with succes--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][ERROR]--bind function failed--
+[SOCKET][ERROR]--bind function failed--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[1]--
+[SOCKET][SUCCES]--Client disconnected.Waiting for a new connection...--
+[SOCKET][SUCCES]--Client connected--
+[RESPONSE][SUCCES]--Login with succes[admin]--
+[RESPONSE][SUCCES]--Logged out with succes--
+[RESPONSE][ERROR]--Login failed[albu:albu]--
+[DB][SUCCES]--Insert into table Users succeded--
+[RESPONSE][SUCCES]--Register with succes[albu]--
+[RESPONSE][SUCCES]--Login with succes[albu]--
+[RESPONSE][SUCCES]--Logged out with succes--

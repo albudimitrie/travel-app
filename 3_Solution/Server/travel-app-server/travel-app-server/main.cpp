@@ -26,22 +26,12 @@ void main()
 	DataBaseCon* db = DataBaseCon::getInstance();
 	db->connect("ALBUU\\SQLEXPRESS", "TravelApp");
 	Logger::getInstance()->setPath("LOGS.txt");
-
-
-
+	UserRepository users;
 	TCPServer server(12345);
 	server.run();
-
-
-		
-
 	}
 	catch (...)
 	{
 		std::cout << "Eroare\n";
 	}
-
-
-
-
 }

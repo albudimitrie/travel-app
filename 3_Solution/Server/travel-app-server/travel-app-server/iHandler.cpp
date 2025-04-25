@@ -2,6 +2,7 @@
 #include "LoginHandler.h"
 #include "RegisterHandler.h"
 #include "LogoutHandler.h"
+#include "GetSearchHistoryHandler.h"
 
 iHandler* FactoryHandlers::makeLoginHandler()
 {
@@ -16,4 +17,9 @@ iHandler* FactoryHandlers::makeRegisterHandler()
 iHandler* FactoryHandlers::makeLogoutHandler()
 {
 	return new LogoutHandler();
+}
+
+iHandler* FactoryHandlers::makeGetSearchHistoryHandler()
+{
+	return new GetSearchHistoryHandler();
 }
