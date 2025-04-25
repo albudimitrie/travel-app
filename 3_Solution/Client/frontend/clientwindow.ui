@@ -113,36 +113,13 @@ QPushButton:pressed {
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="searchBar">
+   <widget class="QScrollArea" name="scrollAreaAccommodations">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>50</y>
-      <width>113</width>
-      <height>28</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="searchButton">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>50</y>
-      <width>83</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>750</x>
-      <y>240</y>
-      <width>120</width>
-      <height>85</height>
+      <x>304</x>
+      <y>200</y>
+      <width>1096</width>
+      <height>501</height>
      </rect>
     </property>
     <property name="widgetResizable">
@@ -153,11 +130,139 @@ QPushButton:pressed {
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>118</width>
-       <height>83</height>
+       <width>1094</width>
+       <height>499</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2"/>
+    </widget>
+   </widget>
+   <widget class="QScrollArea" name="scrollAreaAttractions">
+    <property name="geometry">
+     <rect>
+      <x>304</x>
+      <y>200</y>
+      <width>1096</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1094</width>
+       <height>499</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QScrollArea" name="scrollAreaTransportation">
+    <property name="geometry">
+     <rect>
+      <x>304</x>
+      <y>200</y>
+      <width>1096</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1094</width>
+       <height>499</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushAcc">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>140</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">    QPushButton {
+        background: #2e2e2e;
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 8px 16px;
+        color: #e0e0e0;
+    }
+    QPushButton:checked {
+        background: green;          /* fundal verde */
+        border: 2px solid darkgreen;/* chenar verde închis */
+        color: white;
+    }</string>
+    </property>
+    <property name="text">
+     <string>ACCOMODATIONS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushAtt">
+    <property name="geometry">
+     <rect>
+      <x>745</x>
+      <y>140</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">    QPushButton {
+        background: #2e2e2e;
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 8px 16px;
+        color: #e0e0e0;
+    }
+    QPushButton:checked {
+        background: green;          /* fundal verde */
+        border: 2px solid darkgreen;/* chenar verde închis */
+        color: white;
+    }</string>
+    </property>
+    <property name="text">
+     <string>ATTRACTIONS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushTra">
+    <property name="geometry">
+     <rect>
+      <x>1170</x>
+      <y>140</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">    QPushButton {
+        background: #2e2e2e;
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 8px 16px;
+        color: #e0e0e0;
+    }
+    QPushButton:checked {
+        background: green;          /* fundal verde */
+        border: 2px solid darkgreen;/* chenar verde închis */
+        color: white;
+    }</string>
+    </property>
+    <property name="text">
+     <string>TRANSPORTATION</string>
+    </property>
    </widget>
   </widget>
  </widget>

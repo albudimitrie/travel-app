@@ -19,11 +19,11 @@ signals:
     void backToLogin(); // Signal to return .
 
 private slots:
-    void on_pushButton_clicked(); // Button for SUBMIT .
+    void on_pushButton_clicked(); // Button for submit .
 
     void on_pushButton_2_clicked(); // Button for 'go back to login'
 
-    void on_toolButton_clicked(); //EYE Pass
+    void on_toolButton_clicked(); //Eye for password
 
 private:
     Ui::registerWindow *ui;

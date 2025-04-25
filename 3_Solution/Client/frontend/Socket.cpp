@@ -10,7 +10,7 @@ Socket* Socket::getInstance()
     return instance;
 }
 Socket::Socket() {
-    // Inițializare Winsock
+    // Initializare Winsock
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
         qDebug()<<"WSAStartup failed!\n";
         return;
@@ -24,7 +24,7 @@ Socket::Socket() {
         return;
     }
 
-    // Configurare adresă server
+    // Configurare adresa server
     clientService.sin_family = AF_INET;
     inet_pton(AF_INET, "172.16.42.1", &clientService.sin_addr.s_addr);
     clientService.sin_port = htons(12345);
@@ -52,6 +52,7 @@ void Socket::sendMessage(const char* message) {
 
 QJsonObject Socket::receiveMessage() {
      char buffer[1024] = {0};
+
      recv(client_sock, buffer, 1024, 0);
 
      QJsonDocument jsonDoc = QJsonDocument::fromJson(buffer);

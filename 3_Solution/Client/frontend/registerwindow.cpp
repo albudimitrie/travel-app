@@ -23,7 +23,7 @@ registerWindow::registerWindow(QWidget *parent)
     ui->lineEdit_2->setEchoMode(QLineEdit::Password);
 
     QPixmap pixmap(":/images/assets/closed.png");
-    //qDebug() << "Dimensiunea imaginii:" << pixmap.size();
+    //qDebug() << "Image size:" << pixmap.size();
     if (pixmap.isNull()) {
         qDebug() << "Eroare: Imaginea nu a fost încărcată!";
     } else {
@@ -49,7 +49,7 @@ registerWindow::~registerWindow()
 void registerWindow::on_pushButton_clicked()
 {
    // this->hide();       // Hide register window
-   // emit backToLogin(); // emit the signal to notify the login window to display
+   // emit backToLogin(); // Emit the signal to notify the login window to display
     IRequest *regReq = FactoryRequest::registerReq(ui->lineEdit->text(),ui->lineEdit_2->text());
 
     Socket* sock = Socket::getInstance();
@@ -68,8 +68,8 @@ void registerWindow::on_pushButton_clicked()
 
         QTimer::singleShot(3000, this, [=](){
          ui->label_3->setVisible(false);
-            this->hide();       // Hide register WINDOW
-            emit backToLogin(); // emit the signal to notify the login window to display
+            this->hide();       // Hide register window
+            emit backToLogin(); // Emit the signal to notify the login window to display
         });
     }
     else
@@ -87,8 +87,8 @@ void registerWindow::on_pushButton_clicked()
 
 void registerWindow::on_pushButton_2_clicked()
 {
-    this->hide();       // Hide register WINDOW
-    emit backToLogin(); // emit the signal to notify the login window to display
+    this->hide();       // Hide register window
+    emit backToLogin(); // Emit the signal to notify the login window to display
 }
 
 

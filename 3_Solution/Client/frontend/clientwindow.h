@@ -19,6 +19,10 @@ class clientWindow : public QMainWindow
 public:
     explicit clientWindow(QWidget *parent = nullptr,QString username="");
     ~clientWindow();
+    void showAccommodations();
+    void showAttractions();
+    void showTransportations();
+    void designScroller(QScrollArea*scroller);
 
 signals:
     void backToLogin();
@@ -26,25 +30,24 @@ signals:
 private slots:
     void on_logout_clicked();
 
-    void on_searchButton_clicked();
+    void on_pushAcc_clicked();
 
-    // Sloturile pentru scrollare
-    void scrollUp();
-    void scrollDown();
+    void on_pushAtt_clicked();
 
-
-    void on_searchBar_returnPressed();
-
-    void on_searchBar_textChanged(const QString &arg1);
-
-    void on_searchBar_cursorPositionChanged(int arg1, int arg2);
+    void on_pushTra_clicked();
 
 private:
     Ui::clientWindow *ui;
     QString username;
-    QScrollArea *scrollArea;        // ScrollArea principală
-    QWidget *contentWidget;         // Widget-ul care conține elementele din scrollArea
-    QVBoxLayout *contentLayout;     // Layout pentru widget-ul din scrollArea
+    QScrollArea* scrollAcc;
+    QScrollArea* scrollAtt;
+    QScrollArea* scrollTra;
+    QPushButton* butAcc;
+    QPushButton* butAtt;
+    QPushButton* butTra;
+    QWidget* widAcc;
+    QWidget* widAtt;
+    QWidget* widTra;
 };
 
 #endif // CLIENTWINDOW_H

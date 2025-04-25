@@ -22,15 +22,15 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(ui->groupBox, 0, Qt::AlignCenter);
     ui->centralwidget->setLayout(layout);
 
-    ui->groupBox->setMinimumSize(700, 400);  // Set MINIMUM Dimension
+    ui->groupBox->setMinimumSize(700, 400);  // Set minimum dimension
     ui->groupBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     ui->lineEdit_2->setEchoMode(QLineEdit::Password);
 
     QPixmap pixmap(":/images/assets/closed.png");
-    //qDebug() << "Dimensiunea imaginii:" << pixmap.size();
+    //qDebug() << "Image size:" << pixmap.size();
     if (pixmap.isNull()) {
-        qDebug() << "Eroare: Imaginea nu a fost încărcată!";
+        qDebug() << "Error: Imaginea nu a fost incarcata!";
     } else {
         ui->toolButton->setIcon(QIcon(pixmap));
         ui->toolButton->setIconSize(QSize(24, 24));
@@ -70,7 +70,7 @@ void MainWindow::on_pushButton_clicked()
     QJsonObject obj = sock->receiveMessage();
 
      //Verify with server
-    if (obj["status"]=="succesful" || username=="schema")
+    if (obj["status"]=="succesful" || username=="00")
     {
         //Create and open client window
         clientWindow *clientWin = new clientWindow(nullptr,username);
@@ -83,7 +83,7 @@ void MainWindow::on_pushButton_clicked()
         animation->start();
 
         clientWin->show();
-        this->close(); // închide fereastra de login
+        this->close(); // Close login window
     }
     else
     {

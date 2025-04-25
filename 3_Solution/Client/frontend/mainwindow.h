@@ -21,13 +21,13 @@ public:
 private slots:
     void on_pushButton_clicked(); //login
 
-    void on_pushButton_2_clicked(); // REGISTER BUTTON
+    void on_pushButton_2_clicked(); // Register button
 
-    void on_toolButton_clicked(); //EYE Pass
+    void on_toolButton_clicked(); //Eye for password
 
 private:
     Ui::MainWindow *ui;
-    registerWindow *registerWin = nullptr; // Instance for reigster window
+    registerWindow *registerWin = nullptr; // Instance for register window
     bool isPasswordVisible = false;
 
 };
