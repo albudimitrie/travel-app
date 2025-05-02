@@ -7,6 +7,8 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QWidget>
+#include "accommodation.h"
+#include<QLabel>
 
 namespace Ui {
 class clientWindow;
@@ -19,10 +21,13 @@ class clientWindow : public QMainWindow
 public:
     explicit clientWindow(QWidget *parent = nullptr,QString username="");
     ~clientWindow();
-    void showAccommodations();
-    void showAttractions();
-    void showTransportations();
-    void designScroller(QScrollArea*scroller);
+   // void showAccommodations();
+   // void showAttractions();
+   // void showTransportations();
+    void designScroller(QScrollArea* scroller);
+    void populateAccColumn(QWidget* widget);
+    void loadDataFromServer();
+    void formatLabel(QLabel *label, Accommodation *acc, Destination *dest);
 
 signals:
     void backToLogin();
@@ -48,6 +53,10 @@ private:
     QWidget* widAcc;
     QWidget* widAtt;
     QWidget* widTra;
+    QVector<Accommodation*> accommodations;
+    QVector<QPushButton*> accommodationButtons;
+
+
 };
 
 #endif // CLIENTWINDOW_H

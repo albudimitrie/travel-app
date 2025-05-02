@@ -19,3 +19,23 @@ IRequest* FactoryRequest::historyReq(QString username)
 {
     return new HistoryRequest(username);
 }
+
+IRequest* FactoryRequest::accomodationReq(int id)
+{
+    return new AccommodationRequest(id);
+}
+
+IRequest* FactoryRequest::numberaccommodationsReq()
+{
+    return new NumberAccommodationsRequest();
+}
+
+IRequest* FactoryRequest::photoaccomodationReq(int id)
+{
+    return new PhotoAccommodationRequest(id);
+}
+
+IRequest* FactoryRequest::ackReq()
+{
+    return new ACK();
+}

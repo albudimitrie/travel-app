@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "registerwindow.h"
 
+class clientWindow;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -29,6 +31,7 @@ private:
     Ui::MainWindow *ui;
     registerWindow *registerWin = nullptr; // Instance for register window
     bool isPasswordVisible = false;
+    clientWindow *clientWin = nullptr;
 
 };
 #endif // MAINWINDOW_H

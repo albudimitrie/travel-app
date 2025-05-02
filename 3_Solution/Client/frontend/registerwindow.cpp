@@ -48,6 +48,7 @@ registerWindow::~registerWindow()
 
 void registerWindow::on_pushButton_clicked()
 {
+    IRequest *ack = FactoryRequest::ackReq();
    // this->hide();       // Hide register window
    // emit backToLogin(); // Emit the signal to notify the login window to display
     IRequest *regReq = FactoryRequest::registerReq(ui->lineEdit->text(),ui->lineEdit_2->text());
@@ -59,6 +60,8 @@ void registerWindow::on_pushButton_clicked()
     sock->sendMessage(regReq->getRequest());
 
     QJsonObject obj=sock->receiveMessage();
+
+    sock->sendMessage(ack->getRequest());
 
     if(obj["status"]=="succesful")
     {

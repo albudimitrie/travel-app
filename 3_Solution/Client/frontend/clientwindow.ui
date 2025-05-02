@@ -207,7 +207,7 @@ QPushButton:pressed {
     }</string>
     </property>
     <property name="text">
-     <string>ACCOMODATIONS</string>
+     <string>ACCOMMODATIONS</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushAtt">

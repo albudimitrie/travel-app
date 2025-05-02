@@ -56,6 +56,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    IRequest*ack = FactoryRequest::ackReq();
+
+
     QString username = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
 
@@ -68,12 +71,13 @@ void MainWindow::on_pushButton_clicked()
     sock->sendMessage(logReq->getRequest());
 
     QJsonObject obj = sock->receiveMessage();
-
+    sock->sendMessage(ack->getRequest());
      //Verify with server
-    if (obj["status"]=="succesful" || username=="00")
+    if (obj["status"]=="succesful")
     {
         //Create and open client window
-        clientWindow *clientWin = new clientWindow(nullptr,username);
+        if(clientWin!=nullptr){ delete clientWin; clientWin=nullptr; }
+        clientWin = new clientWindow(nullptr,username);
         connect(clientWin, &clientWindow::backToLogin, this, &MainWindow::show);
         QPropertyAnimation *animation = new QPropertyAnimation(clientWin, "windowOpacity");
         animation->setDuration(800);
@@ -81,7 +85,6 @@ void MainWindow::on_pushButton_clicked()
         animation->setEndValue(1.0);
         animation->setEasingCurve(QEasingCurve::InOutCubic);
         animation->start();
-
         clientWin->show();
         this->close(); // Close login window
     }

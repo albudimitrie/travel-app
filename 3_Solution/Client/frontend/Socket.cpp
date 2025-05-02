@@ -26,7 +26,7 @@ Socket::Socket() {
 
     // Configurare adresa server
     clientService.sin_family = AF_INET;
-    inet_pton(AF_INET, "172.16.42.1", &clientService.sin_addr.s_addr);
+    inet_pton(AF_INET, "25.31.220.17", &clientService.sin_addr.s_addr);
     clientService.sin_port = htons(12345);
 
     // Conectare la server
@@ -59,11 +59,26 @@ QJsonObject Socket::receiveMessage() {
 
      QJsonObject jsonObj = jsonDoc.object();
 
-     qDebug() << "Server JSON:" << jsonObj;
+     //qDebug() << "Server JSON:" << jsonObj;
 
      qDebug()<<"Server: "<<buffer<<" .\n";
 
      return jsonObj;
+}
+QJsonObject Socket::receivePhoto(int size){
+    char *buffer = new char[size+50];
 
+    recv(client_sock, buffer, size+50, 0);
 
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(buffer);
+
+    QJsonObject jsonObj = jsonDoc.object();
+
+    qDebug() << "Server JSON:" << jsonObj;
+
+    qDebug()<<"Server: "<<buffer<<" .\n";
+
+    delete [] buffer;
+
+    return jsonObj;
 }

@@ -10,7 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     Socket.cpp \
+    accommodation.cpp \
+    accommodationrequest.cpp \
+    ack.cpp \
     clientwindow.cpp \
+    destination.cpp \
     factoryrequest.cpp \
     historyrequest.cpp \
     irequest.cpp \
@@ -18,18 +22,26 @@ SOURCES += \
     logoutrequest.cpp \
     main.cpp \
     mainwindow.cpp \
+    numberaccommodationsrequest.cpp \
+    photoaccommodationrequest.cpp \
     registerrequest.cpp \
     registerwindow.cpp
 
 HEADERS += \
     Socket.h \
+    accommodation.h \
+    accommodationrequest.h \
+    ack.h \
     clientwindow.h \
+    destination.h \
     factoryrequest.h \
     historyrequest.h \
     irequest.h \
     loginrequest.h \
     logoutrequest.h \
     mainwindow.h \
+    numberaccommodationsrequest.h \
+    photoaccommodationrequest.h \
     registerrequest.h \
     registerwindow.h
 

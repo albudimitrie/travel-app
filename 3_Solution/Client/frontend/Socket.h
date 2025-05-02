@@ -26,6 +26,7 @@ public:
     static Socket* getInstance();
     void sendMessage(const char* message);
     QJsonObject receiveMessage();
+    QJsonObject receivePhoto(int size);
 };
 
 #endif // SOCKET_H
