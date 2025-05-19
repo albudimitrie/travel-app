@@ -13,6 +13,9 @@ SOURCES += \
     accommodation.cpp \
     accommodationrequest.cpp \
     ack.cpp \
+    allattractionsrequest.cpp \
+    allroutesrequest.cpp \
+    attraction.cpp \
     clientwindow.cpp \
     destination.cpp \
     factoryrequest.cpp \
@@ -24,14 +27,23 @@ SOURCES += \
     mainwindow.cpp \
     numberaccommodationsrequest.cpp \
     photoaccommodationrequest.cpp \
+    photoattractionrequest.cpp \
+    phototransportationrequest.cpp \
     registerrequest.cpp \
-    registerwindow.cpp
+    registerwindow.cpp \
+    transportation.cpp \
+    transportationroute.cpp \
+    trip.cpp \
+    tripsrequest.cpp
 
 HEADERS += \
     Socket.h \
     accommodation.h \
     accommodationrequest.h \
     ack.h \
+    allattractionsrequest.h \
+    allroutesrequest.h \
+    attraction.h \
     clientwindow.h \
     destination.h \
     factoryrequest.h \
@@ -42,8 +54,14 @@ HEADERS += \
     mainwindow.h \
     numberaccommodationsrequest.h \
     photoaccommodationrequest.h \
+    photoattractionrequest.h \
+    phototransportationrequest.h \
     registerrequest.h \
-    registerwindow.h
+    registerwindow.h \
+    transportation.h \
+    transportationroute.h \
+    trip.h \
+    tripsrequest.h
 
 FORMS += \
     clientwindow.ui \

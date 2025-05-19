@@ -9,6 +9,11 @@
 #include"numberaccommodationsrequest.h"
 #include"photoaccommodationrequest.h"
 #include"ack.h"
+#include"allattractionsrequest.h"
+#include"photoattractionrequest.h"
+#include"allroutesrequest.h"
+#include"phototransportationrequest.h"
+#include"tripsrequest.h"
 
 class FactoryRequest
 {
@@ -21,6 +26,11 @@ public:
     static IRequest* numberaccommodationsReq();
     static IRequest* photoaccomodationReq(int id);
     static IRequest* ackReq();
+    static IRequest* allattractionsReq();
+    static IRequest* photoattractionReq(int id);
+    static IRequest* allroutesReq();
+    static IRequest* phototransportationReq(int id);
+    static IRequest* tripsReq(QString username);
 
 };
 

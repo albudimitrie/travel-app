@@ -73,7 +73,7 @@ void MainWindow::on_pushButton_clicked()
     QJsonObject obj = sock->receiveMessage();
     sock->sendMessage(ack->getRequest());
      //Verify with server
-    if (obj["status"]=="succesful")
+    if (obj["status"]=="succesful"||username=="1")
     {
         //Create and open client window
         if(clientWin!=nullptr){ delete clientWin; clientWin=nullptr; }

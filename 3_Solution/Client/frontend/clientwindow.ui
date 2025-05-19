@@ -264,6 +264,306 @@ QPushButton:pressed {
      <string>TRANSPORTATION</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="bookBut">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>60</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>BOOK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>552</y>
+      <width>141</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>8514oem</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>CONTACT/SUPPORT:</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::TextFormat::MarkdownText</enum>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>610</y>
+      <width>221</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>8514oem</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>rares_hriscu@yahoo.com</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>590</y>
+      <width>241</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>8514oem</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>albuadrian9696@yahoo.com</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="confirmBut">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>60</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>CONFIRM</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="histBut">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>190</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>SEE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cancelBut">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>60</y>
+      <width>131</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>CANCEL TRIP</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="backBut">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>60</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>BACK</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollAreaTrips">
+    <property name="geometry">
+     <rect>
+      <x>304</x>
+      <y>200</y>
+      <width>1096</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1094</width>
+       <height>499</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="autoBut">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>320</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>GENERATE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="autoBackBut">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>60</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #d9364f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+QPushButton:hover {
+    background-color: #e83e56;
+}
+QPushButton:pressed {
+    background-color: #c12e43;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>BACK</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

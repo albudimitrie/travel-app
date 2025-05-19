@@ -39,3 +39,28 @@ IRequest* FactoryRequest::ackReq()
 {
     return new ACK();
 }
+
+IRequest* FactoryRequest::allattractionsReq()
+{
+    return new AllAttractionsRequest();
+}
+
+IRequest* FactoryRequest::photoattractionReq(int id)
+{
+    return new PhotoAttractionRequest(id);
+}
+
+IRequest* FactoryRequest::allroutesReq()
+{
+    return new AllRoutesRequest();
+}
+
+IRequest* FactoryRequest::phototransportationReq(int id)
+{
+    return new PhotoTransportationRequest(id);
+}
+
+IRequest* FactoryRequest::tripsReq(QString username)
+{
+    return new TripsRequest(username);
+}
