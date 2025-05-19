@@ -131,16 +131,28 @@
     <ClCompile Include="AAccommodation.cpp" />
     <ClCompile Include="AAttraction.cpp" />
     <ClCompile Include="AccommodationRepository.cpp" />
+    <ClCompile Include="AddCustomTripHandler.cpp" />
     <ClCompile Include="AHandler.cpp" />
     <ClCompile Include="Apartament.cpp" />
     <ClCompile Include="ATransportation.cpp" />
     <ClCompile Include="AttractionRepository.cpp" />
+    <ClCompile Include="Bus.cpp" />
+    <ClCompile Include="ConfirmSelectedGeneratedTripHandler.cpp" />
     <ClCompile Include="CulturalAttraction.cpp" />
-    <ClCompile Include="CurrentUser.cpp" />
     <ClCompile Include="DataBaseCon.cpp" />
+    <ClCompile Include="DateTime.cpp" />
+    <ClCompile Include="DayTrip.cpp" />
     <ClCompile Include="Destination.cpp" />
     <ClCompile Include="DestinationRepository.cpp" />
+    <ClCompile Include="GenerateTripsHandlers.cpp" />
+    <ClCompile Include="GetAccommodationWithIDHandler.cpp" />
+    <ClCompile Include="GetAllAttractionsHandler.cpp" />
+    <ClCompile Include="GetAllRoutesHandler.cpp" />
+    <ClCompile Include="GetImageHandler.cpp" />
+    <ClCompile Include="GetNumberAccomodationsHandler.cpp" />
     <ClCompile Include="GetSearchHistoryHandler.cpp" />
+    <ClCompile Include="GetTripConfirmation.cpp" />
+    <ClCompile Include="GetTripHistoryHandler.cpp" />
     <ClCompile Include="HandlerManager.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="iAccommodation.cpp" />
@@ -161,6 +173,10 @@
     <ClCompile Include="TCPServer.cpp" />
     <ClCompile Include="TrainTransport.cpp" />
     <ClCompile Include="TransportationRepository.cpp" />
+    <ClCompile Include="TransportationRoute.cpp" />
+    <ClCompile Include="Trip.cpp" />
+    <ClCompile Include="TripRepository.cpp" />
+    <ClCompile Include="TripService.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserRepository.cpp" />
   </ItemGroup>
@@ -168,16 +184,28 @@
     <ClInclude Include="AAccommodation.h" />
     <ClInclude Include="AAttraction.h" />
     <ClInclude Include="AccommodationRepository.h" />
+    <ClInclude Include="AddCustomTripHandler.h" />
     <ClInclude Include="AHandler.h" />
     <ClInclude Include="Apartament.h" />
     <ClInclude Include="ATransportation.h" />
     <ClInclude Include="AttractionRepository.h" />
+    <ClInclude Include="Bus.h" />
+    <ClInclude Include="ConfirmSelectedGeneratedTripHandler.h" />
     <ClInclude Include="CulturalAttraction.h" />
-    <ClInclude Include="CurrentUser.h" />
     <ClInclude Include="DataBaseCon.h" />
+    <ClInclude Include="DateTime.h" />
+    <ClInclude Include="DayTrip.h" />
     <ClInclude Include="Destination.h" />
     <ClInclude Include="DestinationRepository.h" />
+    <ClInclude Include="GenerateTripsHandlers.h" />
+    <ClInclude Include="GetAccommodationWithIDHandler.h" />
+    <ClInclude Include="GetAllAttractionsHandler.h" />
+    <ClInclude Include="GetAllRoutesHandler.h" />
+    <ClInclude Include="GetImageHandler.h" />
+    <ClInclude Include="GetNumberAccomodationsHandler.h" />
     <ClInclude Include="GetSearchHistoryHandler.h" />
+    <ClInclude Include="GetTripConfirmation.h" />
+    <ClInclude Include="GetTripHistoryHandler.h" />
     <ClInclude Include="HandlerManager.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="iAccommodation.h" />
@@ -196,16 +224,20 @@
     <ClInclude Include="TCPServer.h" />
     <ClInclude Include="TrainTransport.h" />
     <ClInclude Include="TransportationRepository.h" />
+    <ClInclude Include="TransportationRoute.h" />
+    <ClInclude Include="Trip.h" />
+    <ClInclude Include="TripRepository.h" />
+    <ClInclude Include="TripService.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserRepository.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="LOGS.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram21.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LOGS.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

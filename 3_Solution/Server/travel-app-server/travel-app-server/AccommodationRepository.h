@@ -8,7 +8,12 @@ public:
 	virtual void update(const iAccommodation& obj) override;
 	virtual void remove(const iAccommodation& obj) override;
 	virtual std::vector<iAccommodation*> getAll() override;
-	virtual std::vector<iAccommodation*> getByFilters(std::vector<Filter*>) override;
+
 	virtual ~AccommodationRepository() = default;
+	int getNumberOfAccommodations();
+	std::vector<int> getIDS();
+	iAccommodation* getAccWithID(int id);
+	std::string getPhotoPathOnID(int id);
+	std::vector<iAccommodation*>getAccsWithFilters(std::string country, std::string climate, std::vector<std::string> type_options);
 };
 

@@ -33,7 +33,5 @@ public:
 	bool connect(const std::string& serverName, const std::string& dbName);
 	void disconnect();
 	bool isConnected() const;
-	bool executeQuery(std::string query, std::vector<std::vector<std::string>>& result);
-	bool insert(std::string query, std::vector<std::vector<std::string>>& toInsert);
 };
 

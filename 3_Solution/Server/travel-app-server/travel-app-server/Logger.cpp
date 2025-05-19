@@ -2,7 +2,10 @@
 
 Logger* Logger::_instance = nullptr;
 
-
+Logger::Logger()
+{
+    
+}
 std::string Logger::threatStatus(LogStatus::STATUS stat)
 {
     if (stat == 0)
@@ -31,6 +34,7 @@ Logger* Logger::getInstance()
 
 void Logger::destroyInstance()
 {
+
     if (_instance)
     {
         delete _instance;
@@ -47,29 +51,40 @@ void Logger::setPath(const std::string& path)
 
 void Logger::logDBActions(LogStatus::STATUS status, const std::string& action)
 {
-
-    std::string LOG = "[DB]" + threatStatus(status);
+    DateTime _date;
+    std::string date = _date.extractFormattedTime();
+    std::string LOG = date + "[DB]" + threatStatus(status);
     LOG += "--" + action + "--\n";
+    std::cout << LOG;
     writeToFile(LOG);
 }
 
 void Logger::logSockActions(LogStatus::STATUS status, const std::string& action)
 {
-    std::string LOG = "[SOCKET]" + threatStatus(status);
+    DateTime _date;
+    std::string date = _date.extractFormattedTime();
+    std::string LOG = date+ "[SOCKET]" + threatStatus(status);
     LOG += "--" + action + "--\n";
+    std::cout << LOG;
     writeToFile(LOG);
 }
 
 void Logger::logResponse(LogStatus::STATUS status, const std::string& action)
 {
-    std::string LOG = "[RESPONSE]" + threatStatus(status);
+    DateTime _date;
+    std::string date = _date.extractFormattedTime();
+    std::string LOG = date+"[RESPONSE]" + threatStatus(status);
     LOG += "--" + action + "--\n";
+    std::cout << LOG;
     writeToFile(LOG);
 }
 
 void Logger::logAction(LogStatus::STATUS status, const std::string& action)
 {
-    std::string LOG = "[ACTION]" + threatStatus(status);
+    DateTime _date;
+    std::string date = _date.extractFormattedTime();
+    std::string LOG = date +"[ACTION]" + threatStatus(status);
     LOG += "--" + action + "--\n";
+    std::cout << LOG;
     writeToFile(LOG);
 }

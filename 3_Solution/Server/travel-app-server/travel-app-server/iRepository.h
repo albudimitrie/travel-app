@@ -5,9 +5,7 @@
 #include "Logger.h"
 
 
-class Filter;
-
-//REPO PATTERN FOR DATA LAYER COMMUNICATION, CRUD OPERATIONS + FILTERING ON SQL SERVER DATABASE
+//REPO PATTERN FOR DATABASE LAYER COMMUNICATION, CRUD OPERATIONS(MOSTLY OF THEM CLASSES WILL DO THESE OPS)
 template <typename T>
 class iRepository
 {
@@ -17,26 +15,16 @@ public:
 	virtual void update(const T& obj) = 0;
 	virtual void remove(const T& obj) = 0;
 	virtual std::vector<T*> getAll() = 0;
-	virtual std::vector<T*> getByFilters(std::vector<Filter *>) = 0;
 	virtual ~iRepository() = default;
 
 };
-
-
-
-
-
 //------------------------------------------------------------------------------------------------------------
-
-
-
-
 
 template<typename T>
 class ARepository : public iRepository<T>
 {
 protected:
-	DataBaseCon* _db;
+	DataBaseCon* _db;	//database connection needed for QUERYING
 public:
 	ARepository();
 	virtual ~ARepository();
@@ -53,5 +41,6 @@ inline ARepository<T>::ARepository()
 template <typename T>
 inline ARepository<T>::~ARepository()
 {
+	//not responsible for creating, also not responsible for destroying
 	_db = nullptr;
 }

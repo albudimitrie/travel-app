@@ -13,6 +13,7 @@ public:
 	HandlerManager() = default;
 	void addHandler(iHandler* handler);
 	nlohmann::json processRequest(nlohmann::json& request);
+	~HandlerManager();
 
 };
 

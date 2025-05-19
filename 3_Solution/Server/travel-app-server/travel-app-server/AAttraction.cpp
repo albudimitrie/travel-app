@@ -1,5 +1,13 @@
 #include "AAttraction.h"
 
+AAttraction::~AAttraction()
+{
+    if (_destination)
+    {
+        delete _destination;
+    }
+}
+
 void AAttraction::setDestination(Destination* destination) {
     _destination = destination;
 }
@@ -18,6 +26,11 @@ void AAttraction::setTicketPrice(double price) {
 
 void AAttraction::setId(int id) {
     _id = id;
+}
+
+void AAttraction::setCategory(const std::string& category)
+{
+    _category = category;
 }
 
 Destination* AAttraction::getDestination() const {

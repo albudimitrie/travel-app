@@ -22,6 +22,7 @@ public:
 	virtual void setFacilities(const std::string& facilities) override;
 	virtual void clearFacilities() override;
 	virtual void setPricePerNight(int price) override;
+	virtual void setDestination(Destination* dest) override;
 
 
 	virtual int getID() const override { return _id; }
@@ -31,7 +32,8 @@ public:
 	virtual std::string getDescription() const override { return _description; };
 	virtual std::string getFacilities() const { return _facilities; };
 	virtual int getPricePerNight() const override { return _pricePerNight; }
-	virtual ~AAccommodation() = default;
+	virtual ~AAccommodation();
+	virtual std::string getAddress()const override { return _address; }
 
 
 };

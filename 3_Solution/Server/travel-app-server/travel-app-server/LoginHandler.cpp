@@ -2,7 +2,6 @@
 #include "include/json.hpp"
 #include "UserRepository.h"
 #include "User.h"
-#include "CurrentUser.h"
 #include "utils.h"
 
 using json = nlohmann::json;
@@ -45,7 +44,6 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 			user = new User{ username, password, false };
 
 		}
-		CurrentUser::getInstance()->setActive(user);
 		std::string log = "Login with succes[" + username + "]";
 		Logger::getInstance()->logResponse(LogStatus::SUCCES, log);
 	}

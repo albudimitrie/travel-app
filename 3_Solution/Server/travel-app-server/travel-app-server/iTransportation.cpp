@@ -1,11 +1,19 @@
 #include "iTransportation.h"
+#include "PlaneTransport.h"
+#include "Bus.h"
+#include "TrainTransport.h"
 
 iTransportation* FactoryTransportation::makePlaneTransport()
 {
-    return nullptr;
+    return new PlaneTransport();
 }
 
 iTransportation* FactoryTransportation::makeTrainTransport()
 {
-    return nullptr;
+    return new TrainTransport();
+}
+
+iTransportation* FactoryTransportation::makeBusTransportation()
+{
+    return new Bus();
 }

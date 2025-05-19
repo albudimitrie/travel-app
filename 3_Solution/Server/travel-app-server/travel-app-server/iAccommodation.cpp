@@ -1,16 +1,19 @@
 #include "iAccommodation.h"
+#include "Hotel.h"
+#include "Apartament.h"
+#include "Pensiune.h"
 
-iAccommodation* FactoryAccommodations::makeHotel(int id, int destinationId, std::string name, std::string address, std::string description, std::list<std::string>& facilities, int pricePerNight)
+iAccommodation* FactoryAccommodations::makeHotel()
 {
-	return nullptr;
+	return new Hotel();
 }
 
-iAccommodation* FactoryAccommodations::makePensiune(int id, int destinationId, std::string name, std::string address, std::string description, std::list<std::string>& facilities, int pricePerNight)
+iAccommodation* FactoryAccommodations::makePensiune()
 {
-	return nullptr;
+	return new Pensiune();
 }
 
-iAccommodation* FactoryAccommodations::makeApartament(int id, int destinationId, std::string name, std::string address, std::string description, std::list<std::string>& facilities, int pricePerNight)
+iAccommodation* FactoryAccommodations::makeApartament()
 {
-	return nullptr;
+	return new Apartament();
 }

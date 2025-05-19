@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include "DateTime.h"
 
 namespace LogStatus
 {
@@ -13,8 +14,7 @@ class Logger
 	static Logger* _instance;
 	std::string _path;
 	std::ofstream _fout;
-
-	Logger() = default;
+	Logger();
 	~Logger() = default;
 	Logger(const Logger& obj) = delete;
 	Logger(Logger&& obj) = delete;

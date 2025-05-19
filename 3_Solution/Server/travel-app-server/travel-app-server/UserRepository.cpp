@@ -3,7 +3,7 @@
 
 void UserRepository::create(const User& obj)
 {
-	std::string query = "INSERT INTO Users(username, password) VALUES ('" + obj.getUsername() + "','" + obj.getPassword() + "');";
+	std::string query = "INSERT INTO Users(username, password) VALUES ( '" + obj.getUsername() + "' , '" + obj.getPassword() + "' ) ;";
 	SQLHSTMT stmt;
 	SQLRETURN ret;
 
@@ -23,24 +23,17 @@ void UserRepository::create(const User& obj)
 
 void UserRepository::update(const User& obj)
 {
-
-
+	throw std::runtime_error{ "Aceasta functie nu a fost implementata\n" };
 }
 
 void UserRepository::remove(const User& obj)
 {
-	//TODO
+	throw std::runtime_error{ "Aceasta functie nu a fost implementata\n" };
 }
 
 std::vector<User*> UserRepository::getAll()
 {
-	//TODO
-	return std::vector<User*>();
-}
-
-std::vector<User*> UserRepository::getByFilters(std::vector<Filter *>)
-{
-	return std::vector<User*>();
+	throw std::runtime_error{ "Aceasta functie nu a fost implementata\n" };
 }
 
 bool UserRepository::userExists(const std::string& username, const std::string& password)
@@ -122,6 +115,36 @@ bool UserRepository::isUsernameTaken(const std::string& username)
 
 	SQLFreeHandle(SQL_HANDLE_STMT, stmt);
 	return res;
+}
+
+int UserRepository::getIDForUsername(const std::string& username)
+{
+	std::string query = "SELECT ID FROM Users WHERE username = '" + username + "'";
+
+	SQLHSTMT stmt;
+	SQLRETURN ret;
+
+	ret = SQLAllocHandle(SQL_HANDLE_STMT, _db->getDBC(), &stmt);
+	if (!SQL_SUCCEEDED(ret)) {
+		throw std::runtime_error("Eroare handler pentru statement getAllAccommodations");
+	}
+
+	ret = SQLExecDirectA(stmt, (SQLCHAR*)query.c_str(), SQL_NTS);
+	if (!SQL_SUCCEEDED(ret)) {
+		SQLFreeHandle(SQL_HANDLE_STMT, stmt);
+		throw std::runtime_error("Eroare executare query destinatii");
+	}
+	SQLINTEGER ID;
+	SQLBindCol(stmt, 1, SQL_C_LONG, &ID, 0, NULL);
+	if (SQLFetch(stmt) == SQL_SUCCESS)
+	{
+		return ID;
+	}
+	else
+	{
+		throw std::runtime_error{ "Nu exista acest user in baza de date\n" };
+		//TODO LOG PENTRU ASTA
+	}
 }
 
 void UserRepository::addNewSearch(const std::string& username, const std::string& content)

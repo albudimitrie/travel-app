@@ -15,13 +15,14 @@ protected:
 
 	int _id;
 public:
-	virtual ~AAttraction() = default;
+    virtual ~AAttraction();
 
     void setDestination(Destination* destination);
     void setName(const std::string& name);
     void setDescription(const std::string& description);
     void setTicketPrice(double price);
     void setId(int id);
+    virtual void setCategory(const std::string& category) override;
 
     Destination* getDestination() const;
     std::string getName() const;

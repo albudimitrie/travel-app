@@ -4,9 +4,8 @@
 #include <string>
 
 
-class LoginHandler;
-class RegisterHandler;
-class LogoutHandler;
+class TCPServer;
+
 //---------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------
 class iHandler
@@ -28,7 +27,16 @@ public:
 	static iHandler* makeRegisterHandler();
 	static iHandler* makeLogoutHandler();
 	static iHandler* makeGetSearchHistoryHandler();
-
+	static iHandler* makeGetNumberAccommodations();
+	static iHandler* makeGetAccWithId();
+	static iHandler* makeGetPhoto(TCPServer& server);
+	static iHandler* makeGetAllAttractions(TCPServer& server);
+	static iHandler* makeGetAllRoutesHandler(TCPServer& server);
+	static iHandler* makeAddCustomTripHandler();
+	static iHandler* makeGetTripHistoryHandler(TCPServer& server);
+	static iHandler* makeTripConfirmationHandler();
+	static iHandler* makeGenerateTripHandler(TCPServer& server);
+	static iHandler* makeConfirmationOfGeneratedTrips();
 };
 //---------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------

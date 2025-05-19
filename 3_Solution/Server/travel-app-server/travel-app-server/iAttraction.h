@@ -9,6 +9,7 @@ public:
     virtual void setDestination(Destination* destination) = 0;
     virtual void setName(const std::string& name) = 0;
     virtual void setDescription(const std::string& description) = 0;
+    virtual void setCategory(const std::string& category) = 0;
     virtual void setTicketPrice(double price) = 0;
     virtual void setId(int id) = 0;
 

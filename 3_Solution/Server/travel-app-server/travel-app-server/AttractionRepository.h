@@ -10,7 +10,8 @@ public:
 	virtual void update(const iAttraction& obj) override;
 	virtual void remove(const iAttraction& obj) override;
 	virtual std::vector<iAttraction*> getAll() override;
-	virtual std::vector<iAttraction*> getByFilters(std::vector<Filter*>) override;
 	virtual ~AttractionRepository() = default;
+	std::vector<iAttraction*>getAttWithFilters(std::string country, std::string climate, std::vector<std::string> category_options);
+	std::string getPhotoWithID(int id);
 };
 

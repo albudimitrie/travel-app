@@ -1,16 +1,19 @@
 #include "iAttraction.h"
+#include "CulturalAttraction.h"
+#include "MusicalAttraction.h"
+#include "ReligiousAttraction.h"
 
 iAttraction* FactoryAttraction::makeReligiousAttraction()
 {
-    return nullptr;
+    return new ReligiousAttraction();
 }
 
 iAttraction* FactoryAttraction::makeCulturalAttraction()
 {
-    return nullptr;
+    return new CulturalAttraction();
 }
 
 iAttraction* FactoryAttraction::makeMusicalAttraction()
 {
-    return nullptr;
+    return new MusicalAttraction();
 }

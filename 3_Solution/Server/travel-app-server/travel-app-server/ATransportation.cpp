@@ -12,7 +12,7 @@ void ATransportation::setDescription(const std::string& description) {
     _description = description;
 }
 
-void ATransportation::setComfortLevel(int level) {
+void ATransportation::setComfortLevel(std::string level) {
     _comfort_level = level;
 }
 
@@ -40,7 +40,7 @@ std::string ATransportation::getDescription() const {
     return _description;
 }
 
-int ATransportation::getComfortLevel() const {
+std::string ATransportation::getComfortLevel() const {
     return _comfort_level;
 }
 

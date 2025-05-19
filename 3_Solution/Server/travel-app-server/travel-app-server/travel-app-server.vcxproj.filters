@@ -31,6 +31,15 @@
     <Filter Include="Header Files\DESTINATII">
       <UniqueIdentifier>{8ed631bd-4ed7-4d01-9c28-61c97c35b697}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CALATORII">
+      <UniqueIdentifier>{97f1dba3-bca9-46b3-957d-54fb89b681cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CONNECTIONS">
+      <UniqueIdentifier>{af02def2-7b23-461b-ad7e-c815716d75cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UTiLS">
+      <UniqueIdentifier>{a2694781-1711-4596-a484-7852300cf3b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,9 +76,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="User.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CurrentUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
@@ -138,14 +144,59 @@
     <ClCompile Include="DestinationRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GetNumberAccomodationsHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetAccommodationWithIDHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetImageHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetAllAttractionsHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransportationRoute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetAllRoutesHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DayTrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TripRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TripService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCustomTripHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetTripHistoryHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetTripConfirmation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateTripsHandlers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfirmSelectedGeneratedTripHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataBaseCon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TCPServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AHandler.h">
       <Filter>Header Files\HANDLERS</Filter>
     </ClInclude>
@@ -167,23 +218,11 @@
     <ClInclude Include="UserRepository.h">
       <Filter>Header Files\REPOS</Filter>
     </ClInclude>
-    <ClInclude Include="User.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CurrentUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LogoutHandler.h">
       <Filter>Header Files\HANDLERS</Filter>
     </ClInclude>
     <ClInclude Include="GetSearchHistoryHandler.h">
       <Filter>Header Files\HANDLERS</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iAccommodation.h">
       <Filter>Header Files\CAZARI</Filter>
@@ -242,14 +281,80 @@
     <ClInclude Include="DestinationRepository.h">
       <Filter>Header Files\REPOS</Filter>
     </ClInclude>
+    <ClInclude Include="GetNumberAccomodationsHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GetAccommodationWithIDHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GetImageHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GetAllAttractionsHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Bus.h">
+      <Filter>Header Files\TRANSPORT</Filter>
+    </ClInclude>
+    <ClInclude Include="TransportationRoute.h">
+      <Filter>Header Files\TRANSPORT</Filter>
+    </ClInclude>
+    <ClInclude Include="GetAllRoutesHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Trip.h">
+      <Filter>Header Files\CALATORII</Filter>
+    </ClInclude>
+    <ClInclude Include="DayTrip.h">
+      <Filter>Header Files\CALATORII</Filter>
+    </ClInclude>
+    <ClInclude Include="TripRepository.h">
+      <Filter>Header Files\REPOS</Filter>
+    </ClInclude>
+    <ClInclude Include="TripService.h">
+      <Filter>Header Files\CALATORII</Filter>
+    </ClInclude>
+    <ClInclude Include="AddCustomTripHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GetTripHistoryHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GetTripConfirmation.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GenerateTripsHandlers.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBaseCon.h">
+      <Filter>Header Files\CONNECTIONS</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPServer.h">
+      <Filter>Header Files\CONNECTIONS</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\UTiLS</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Header Files\UTiLS</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files\UTiLS</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\UTiLS</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfirmSelectedGeneratedTripHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagram21.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="LOGS.txt">
       <Filter>Resource Files</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram21.cd" />
   </ItemGroup>
 </Project>

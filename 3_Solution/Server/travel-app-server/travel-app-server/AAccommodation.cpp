@@ -37,7 +37,20 @@ void AAccommodation::setPricePerNight(int price)
 	_pricePerNight = price;
 }
 
+void AAccommodation::setDestination(Destination* dest)
+{
+	_destination = dest;
+}
+
 Destination* AAccommodation::getDestination() const
 {
 	return _destination;
+}
+
+AAccommodation::~AAccommodation()
+{
+	if (_destination)
+	{
+		delete _destination;
+	}
 }

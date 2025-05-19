@@ -39,14 +39,12 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 		{
 			users.create(*user);
 		}
-		catch (...)
+		catch (std::exception &e)
 		{
-			std::cout << "Eroare creare user in BD\n";
+			std::cout << e.what() << "\n";
 		}
 		std::string log = "Register with succes[" + username  + "]";
 		Logger::getInstance()->logResponse(LogStatus::SUCCES, log);
-
-
 	}
 
 	return reply;

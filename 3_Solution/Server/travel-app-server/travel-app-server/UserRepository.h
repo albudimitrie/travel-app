@@ -12,7 +12,6 @@ public:
 	virtual void update(const User& obj) override;
 	virtual void remove(const User& obj)override;
 	virtual std::vector<User*> getAll()override;
-	virtual std::vector<User*> getByFilters(std::vector<Filter *>) override;
 	virtual ~UserRepository() = default;
 
 
@@ -21,6 +20,7 @@ public:
 	bool userExists(const std::string& username, const std::string& password);
 	bool isAdmin(const std::string& username, const std::string& password);
 	bool isUsernameTaken(const std::string& username);
+	int getIDForUsername(const std::string& username);
 
 	void addNewSearch(const std::string& username, const std::string& content);
 	std::vector<std::string> getLatestSearches(const std::string& username);
