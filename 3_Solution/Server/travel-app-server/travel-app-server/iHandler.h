@@ -37,6 +37,7 @@ public:
 	static iHandler* makeTripConfirmationHandler();
 	static iHandler* makeGenerateTripHandler(TCPServer& server);
 	static iHandler* makeConfirmationOfGeneratedTrips();
+	static iHandler* makeAddNewSearchHandler();
 };
 //---------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------

@@ -30,6 +30,7 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 
 	if (users.userExists(username, password))
 	{
+		double balance = 0;
 		reply["status"] = "succesful";
 		reply["username"] = username;
 
@@ -42,10 +43,12 @@ nlohmann::json LoginHandler::handle(nlohmann::json& request)
 		{
 			reply["rights"] = "regular";
 			user = new User{ username, password, false };
-
+			balance = users.getFundsForUser(username);
 		}
+		reply["balance"] = balance;
 		std::string log = "Login with succes[" + username + "]";
 		Logger::getInstance()->logResponse(LogStatus::SUCCES, log);
+		delete user;
 	}
 	else
 	{

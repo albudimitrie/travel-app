@@ -37,13 +37,13 @@ iTransportation* TransportationRepository::getTransportationWithID(int id)
 
     ret = SQLAllocHandle(SQL_HANDLE_STMT, _db->getDBC(), &stmt);
     if (!SQL_SUCCEEDED(ret)) {
-        throw std::runtime_error("Eroare handler pentru statement getAllAttractions");
+        throw std::runtime_error("Eroare handler pentru statement getTransportationWithID");
     }
 
     ret = SQLExecDirectA(stmt, (SQLCHAR*)query.c_str(), SQL_NTS);
     if (!SQL_SUCCEEDED(ret)) {
         SQLFreeHandle(SQL_HANDLE_STMT, stmt);
-        throw std::runtime_error("Eroare executare query atractii");
+        throw std::runtime_error("Eroare executare query transporturi");
     }
     SQLINTEGER TransportationID, Capacity;
     SQLCHAR Type[101], Company[51], Description[8000], ComfortLevel[1000];
@@ -82,7 +82,7 @@ iTransportation* TransportationRepository::getTransportationWithID(int id)
         tr->setCapacity(Capacity);
     }
     SQLFreeHandle(SQL_HANDLE_STMT, stmt);
-    //TODO LOGGER 
+    Logger::getInstance()->logDBActions(LogStatus::SUCCES, "Queried Transportation");
     return tr;
 }
 

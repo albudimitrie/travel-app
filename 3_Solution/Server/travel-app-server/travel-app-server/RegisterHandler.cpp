@@ -45,6 +45,7 @@ nlohmann::json RegisterHandler::handle(nlohmann::json& request)
 		}
 		std::string log = "Register with succes[" + username  + "]";
 		Logger::getInstance()->logResponse(LogStatus::SUCCES, log);
+		delete user;
 	}
 
 	return reply;

@@ -104,13 +104,13 @@ int AccommodationRepository::getNumberOfAccommodations()
 
     ret = SQLAllocHandle(SQL_HANDLE_STMT, _db->getDBC(), &stmt);
     if (!SQL_SUCCEEDED(ret)) {
-        throw std::runtime_error("Eroare handler pentru statement getAllAccommodations");
+        throw std::runtime_error("Eroare handler pentru statement GetNumberOfAccommodations");
     }
 
     ret = SQLExecDirectA(stmt, (SQLCHAR*)query.c_str(), SQL_NTS);
     if (!SQL_SUCCEEDED(ret)) {
         SQLFreeHandle(SQL_HANDLE_STMT, stmt);
-        throw std::runtime_error("Eroare executare query destinatii");
+        throw std::runtime_error("Eroare executare query numar destinatii");
     }
     SQLINTEGER number;
     SQLBindCol(stmt, 1, SQL_C_LONG, &number, 0, NULL);

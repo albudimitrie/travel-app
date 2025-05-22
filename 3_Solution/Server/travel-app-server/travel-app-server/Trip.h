@@ -39,7 +39,6 @@ public:
 	void addDayTrip(int dayNumber, DayTrip* dt);
 	~Trip();
 
-	//TODO get/set organizareZILE
 
 };
 

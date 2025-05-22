@@ -132,6 +132,7 @@
     <ClCompile Include="AAttraction.cpp" />
     <ClCompile Include="AccommodationRepository.cpp" />
     <ClCompile Include="AddCustomTripHandler.cpp" />
+    <ClCompile Include="AddToSearchHandler.cpp" />
     <ClCompile Include="AHandler.cpp" />
     <ClCompile Include="Apartament.cpp" />
     <ClCompile Include="ATransportation.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="GetTripConfirmation.cpp" />
     <ClCompile Include="GetTripHistoryHandler.cpp" />
     <ClCompile Include="HandlerManager.cpp" />
+    <ClCompile Include="HandlersManagerBuilder.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="iAccommodation.cpp" />
     <ClCompile Include="iAttraction.cpp" />
@@ -185,6 +187,7 @@
     <ClInclude Include="AAttraction.h" />
     <ClInclude Include="AccommodationRepository.h" />
     <ClInclude Include="AddCustomTripHandler.h" />
+    <ClInclude Include="AddToSearchHandler.h" />
     <ClInclude Include="AHandler.h" />
     <ClInclude Include="Apartament.h" />
     <ClInclude Include="ATransportation.h" />
@@ -207,6 +210,7 @@
     <ClInclude Include="GetTripConfirmation.h" />
     <ClInclude Include="GetTripHistoryHandler.h" />
     <ClInclude Include="HandlerManager.h" />
+    <ClInclude Include="HandlersManagerBuilder.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="iAccommodation.h" />
     <ClInclude Include="iAttraction.h" />
@@ -231,10 +235,6 @@
     <ClInclude Include="User.h" />
     <ClInclude Include="UserRepository.h" />
     <ClInclude Include="utils.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram21.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="LOGS.txt" />

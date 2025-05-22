@@ -195,6 +195,12 @@
     <ClCompile Include="ConfirmSelectedGeneratedTripHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddToSearchHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandlersManagerBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AHandler.h">
@@ -347,10 +353,12 @@
     <ClInclude Include="ConfirmSelectedGeneratedTripHandler.h">
       <Filter>Header Files\HANDLERS</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram21.cd" />
+    <ClInclude Include="AddToSearchHandler.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlersManagerBuilder.h">
+      <Filter>Header Files\HANDLERS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="LOGS.txt">

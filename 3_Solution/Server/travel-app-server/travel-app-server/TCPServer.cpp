@@ -46,6 +46,7 @@ bool TCPServer::initialize()
     }
 
     initialized = true;
+    Logger::getInstance()->logSockActions(LogStatus::SUCCES, "Server initialized succesfully...");
     return true;
 }
 
@@ -177,6 +178,7 @@ void TCPServer::run()
     handlers.addHandler(FactoryHandlers::makeTripConfirmationHandler());
     handlers.addHandler(FactoryHandlers::makeGenerateTripHandler(*this));
     handlers.addHandler(FactoryHandlers::makeConfirmationOfGeneratedTrips());
+    handlers.addHandler(FactoryHandlers::makeAddNewSearchHandler());
 
     if (!start_listening()) {
         return;

@@ -13,6 +13,7 @@
 #include "GetTripConfirmation.h"
 #include "GenerateTripsHandlers.h"
 #include "ConfirmSelectedGeneratedTripHandler.h"
+#include "AddToSearchHandler.h"
 
 iHandler* FactoryHandlers::makeLoginHandler()
 {
@@ -82,4 +83,9 @@ iHandler* FactoryHandlers::makeGenerateTripHandler(TCPServer& server)
 iHandler* FactoryHandlers::makeConfirmationOfGeneratedTrips()
 {
 	return new ConfirmSelectedGeneratedTripHandler{};
+}
+
+iHandler* FactoryHandlers::makeAddNewSearchHandler()
+{
+	return new AddToSearchHandler{};
 }

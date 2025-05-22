@@ -109,41 +109,6 @@ INSERT INTO Accommodations(DestinationID, Name, Type, Address, Description, Pric
 (2, 'CazareTest8', 'PENSIUNE', 'adresa test4', 'descriere test34', 40, 'facilitati test4')
 
 
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\windows.jpg'
-WHERE AccommodationID=5;
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\windows.jpg'
-WHERE AccommodationID=6;
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\windows.jpg'
-WHERE AccommodationID=7;
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\windows.jpg'
-WHERE AccommodationID=8;
-
-
-
-
-
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\Capture.PNG'
-WHERE AccommodationID=4;
-
-
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\windows.jpg',
-DestinationID = 3
-WHERE AccommodationID=3;
-
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\2.jpg'
-WHERE AccommodationID=1;
-
-UPDATE Accommodations
-SET Image ='C:\Users\albua\OneDrive\Pictures\3.jpg',
-Type = 'HOTEL' 
-WHERE AccommodationID=2;
 
 CREATE TABLE Transportation (
     TransportationID INT PRIMARY KEY IDENTITY(1,1),
@@ -171,25 +136,11 @@ INSERT INTO Transportation(Type, Company, Description, PricePerKm, Capacity, Com
 ('TRAIN', 'TransRegio', 'Acesta asigura servicii de transport feroviar si rutier de calatori, inclusiv curse regulate si speciale, in colaborare cu autoritatile locale si regionale. TransRegio are rolul de a conecta localitatile din judetul Bihor si din judetele invecinate, facilitand mobilitatea cetatenilor si integrarea acestora in sistemul de transport public national.',
 0.2, 500, 'ECONOMIC', 'D:\travel-app\travel-app\3_Solution\Server\travel-app-server\images\tren2.jpg')
 
-UPDATE Transportation
-SET ComfortLevel = 'Economic'
-WHERE TransportationID = 2
-
-UPDATE Transportation
-Set Description = 'Gol'
-WHERE TransportationID = 4
-
-
-SELECT * FROM Transportation
-
-SELECT * From Attractions
-
 CREATE VIEW Cazari AS
 SELECT A.*, D.Name as DestinationName, D.City, D.Country
 FROM Accommodations as A
 INNER JOIN Destinations as D
 ON D.DestinationID = A.DestinationID
-
 
 CREATE TABLE RoutesTransportation
 (
@@ -200,9 +151,6 @@ CREATE TABLE RoutesTransportation
 	Distance decimal not null,
 	Duration decimal not null
 );
-
-SELECT *
-FROM Transportation
 
 INSERT INTO RoutesTransportation(TransportationID, CityDeparture, CityArrival, Distance, Duration) VALUES
 (1, 'Bucuresti', 'Milano', 1000, 5),
@@ -235,11 +183,6 @@ Create table GeneratedTrips
 
 )
 
-
-
-
-SELECT *
-FROM Users
 
 CREATE TABLE TripsDays
 (
@@ -333,27 +276,6 @@ END;
 
 
 
-
-SELECT *
-FROM Trips
-
-DELETE FROM Trips
-
-SELECT *
-From TripsDays
-
-TRUNCATE Table TripsDays
-
-SELECT *
-FROM Attractions
-
-SELECT *
-FROM RoutesTransportation
-
-SELECT *
-FROM Transportation
-
-
 CREATE TRIGGER trg_RecalculateTotalCost_AfterInsert
 ON TripsDays
 AFTER INSERT
@@ -439,28 +361,15 @@ BEGIN
     WHERE TripID = @GeneratedTripID;
 END;
 
+
 INSERT INTO GeneratedTrips(UserID,StartDate,EndDate, Duration, isConfirmed, totalCost) VALUES
 (12, '2025-02-03', '2025-02-05', 3, 0, 0)
 
-SELECT *
-FROM GeneratedTrips
-
-SELECT *
-frOM GeneratedTripsDays
-
-SELECT *
-FROM Trips
-
-SELECT *
-from TripsDays
-
-EXEC MoveGeneratedTripDays 1
 
 
 IF OBJECT_ID('ConfirmTrip', 'P') IS NOT NULL
     DROP PROCEDURE ConfirmTrip;
 GO
-
 CREATE PROCEDURE ConfirmTrip
     @TripID INT
 AS
@@ -471,64 +380,6 @@ BEGIN
     SET isConfirmed = 1
     WHERE TripID = @TripID;
 END;
-
-
-
-SELECT 
-    A.AttractionID, 
-    A.Name, 
-    A.Description, 
-    A.Category, 
-    A.TicketPrice, 
-    D.DestinationID,
-    D.Name AS DestinationName,
-    D.Country,
-    D.City,
-    D.Climate
-FROM 
-    Attractions A
-INNER JOIN 
-    Destinations D ON A.DestinationID = D.DestinationID
-WHERE D.IsActive = 1
-
-UPDATE Destinations
-SET Climate ='Sunny'
-
-
-
-SELECT 
-    A.AccommodationID, 
-    A.Name, 
-    A.Type, 
-    A.Address, 
-    A.Description, 
-    A.PricePerNight, 
-    A.Facilities, 
-    D.DestinationID,
-    D.Name AS DestinationName,
-    D.Country,
-    D.City,
-    D.Climate
-FROM 
-    Accommodations A
-INNER JOIN 
-    Destinations D ON A.DestinationID = D.DestinationID
-WHERE D.IsActive = 1
-
-
-SELECT *
-FROM RoutesTransportation
-
-
-SELECT *
-FROM Destinations
-
-SELECT *
-From Attractions
-
-SELECT *
-FROM Accommodations
-
 
 Update Destinations
 SET Name = 'Castelul Huniazilor',
@@ -642,13 +493,6 @@ INSERT INTO Accommodations (DestinationID, Name, Type, Address, Description, Pri
 (12, 'Hotel Vega Vama Veche', 'HOTEL', 'Strada Marii 25, Vama Veche', 'Hotel pe plaja, ideal pentru vacante de vara la mare.', 160.00, 'Wi-Fi, Piscina, Restaurant, Parcare privata, Plaja privata');
 
 
-
-SELECT *
-FROM Accommodations
-
-SELECT *
-FROM Attractions
-
 UPDATE Attractions
 SET Image='D:\travel-app\travel-app\3_Solution\Server\travel-app-server\images\peles.jpg'
 WHERE AttractionID = 7
@@ -659,61 +503,12 @@ SET Image='D:\travel-app\travel-app\3_Solution\Server\travel-app-server\images\m
 WHERE AttractionID = 14
 
 
-SELECT *
-FROM  RoutesTransportation
-
-DELETE 
-FROM RoutesTransportation
-
-SELECT *
-FROM Destinations
-
-
-UPDATE Accommodations
-SET Image='D:\travel-app\travel-app\3_Solution\Server\travel-app-server\images\vega-min.jpg'
-WHERE AccommodationID = 20
-
-SELECT *
-FROM Transportation
-
-
 INSERT INTO Transportation(Type, Company, Description, PricePerKm, Capacity, ComfortLevel, Image)
 VALUES
 ('BUS', 'Societatea Transporturilor Bucuresti', 'Mijloc de transport in comun ce asigura deplasarea cetatenilor in diverse locatii', 1,50, 'Economic','D:\travel-app\travel-app\3_Solution\Server\travel-app-server\images\bus1.png'),
 ('BUS', 'None', 'Null', 0, 0, 'Economic', 'D:\travel-app\travel-app\3_Solution\Server\travel-app-server\images\none.jpg')
 
-
-
-SELECT *
-FROM Transportation
-
 INSERT INTO RoutesTransportation(TransportationID, CityDeparture, CityArrival, Distance, Duration) VALUES
 (5, 'Anywhere', 'Anywhere', 0,0);
 
 
-SELECT *
-FROM Accommodations
-
-SELECT *
-FROM GeneratedTripsDays
-
-SELECT *
-FROM GeneratedTrips
-
-SELECT *
-FROM TripsDays
-
-
-
-SELECT *
-FROM Trips
-
-DELETE FROM GeneratedTrips
-
-SELECT *
-FROM Users
-
-DELETE 
-FROM Trips
-
-EXEC CreateGeneratedTrip 12, '2025-05-22','2025-05-23', 2.000000, 0, 320.000000;

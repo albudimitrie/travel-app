@@ -37,7 +37,6 @@ nlohmann::json GenerateTripsHandlers::handle(nlohmann::json& request)
 
 	TripService trip_service;
 
-	//TODO
 	std::string country, starting_date, ending_date, climate, departure_city, username;
 	int duration;
 	std::vector<std::string> category_options = request["Category"];
