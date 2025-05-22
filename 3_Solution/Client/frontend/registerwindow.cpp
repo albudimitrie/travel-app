@@ -73,8 +73,6 @@ void registerWindow::on_pushButton_clicked()
             emit backToLogin(); // Emit the signal to notify the login window to display
         });
 
-        sock->sendMessage(ack->getRequest());
-
     }
     else
     {
@@ -86,6 +84,7 @@ void registerWindow::on_pushButton_clicked()
          ui->label_3->setVisible(false);
         });
     }
+    sock->sendMessage(ack->getRequest());
 
 }
 

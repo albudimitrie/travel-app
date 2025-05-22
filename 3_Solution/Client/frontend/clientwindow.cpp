@@ -828,7 +828,7 @@ void clientWindow::populateRouColumn(QWidget* widget)
                                 "Descriere: %8\n"
                                 "Confort: %9\n"
                                 "Capacitate: %10\n"
-                                "Preț mediu: %11 lei"
+                                "Preț mediu per KM: %11 EUR"
                                 )
                                 .arg(route->getId())
                                 .arg(route->getDeparture())
@@ -2668,7 +2668,7 @@ void clientWindow::showGeneratedTrips(QJsonObject objData)
         QHBoxLayout* tripLayout = new QHBoxLayout(tripWidget);
 
         QLabel* infoLabel = new QLabel(
-            QString("Trip #%1 | %2 - %3 | %4 zile | Cost: %5 lei")
+            QString("Trip #%1 | %2 - %3 | %4 zile | Cost: %5 EUR")
                 .arg(id).arg(start).arg(end).arg(duration).arg(cost));
 
         QPushButton* detailsButton = new QPushButton("Detalii");
