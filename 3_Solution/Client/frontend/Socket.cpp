@@ -6,7 +6,7 @@ Socket* Socket::instance=nullptr;
 
 Socket* Socket::getInstance()
 {
-    if(instance==nullptr)instance = new Socket();
+    if(instance == nullptr)instance = new Socket();
     return instance;
 }
 Socket::Socket() {
@@ -26,7 +26,7 @@ Socket::Socket() {
 
     // Configurare adresa server
     clientService.sin_family = AF_INET;
-    inet_pton(AF_INET, "192.168.1.1", &clientService.sin_addr.s_addr);
+    inet_pton(AF_INET, "172.16.42.1", &clientService.sin_addr.s_addr);
     clientService.sin_port = htons(12345);
 
     // Conectare la server

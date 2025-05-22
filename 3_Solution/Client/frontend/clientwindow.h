@@ -14,6 +14,9 @@
 #include <QSpinBox>
 #include <QDate>
 #include "trip.h"
+#include "wallet.h"
+#include "walletdialog.h"
+#include <QComboBox>
 
 namespace Ui {
 class clientWindow;
@@ -24,7 +27,7 @@ class clientWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit clientWindow(QWidget *parent = nullptr,QString username="");
+    explicit clientWindow(QWidget *parent = nullptr,QString username="",double balance=0);
     ~clientWindow();
     void designScroller(QScrollArea* scroller);
     void populateAccColumn(QWidget* widget);
@@ -66,6 +69,10 @@ public:
     void showGeneratedTripDetails(Trip*trip);
     void clearLayout(QLayout* layout);
 
+
+    //search
+
+
 signals:
     void backToLogin();
 
@@ -95,7 +102,11 @@ private slots:
 
     void on_autoBackBut_clicked();
 
+    void on_walletBut_clicked();
+
 private:
+    Wallet* wallet;
+
     int zile = 0;
     int ziCurenta = 0;
     QDate startDate;
@@ -115,12 +126,15 @@ private:
     QWidget* widAtt;
     QWidget* widTra;
 
+    QPushButton *walletBut;
     QVector<Accommodation*> accommodations;
     QVector<QPushButton*> accommodationButtons;
     QVector<Attraction*> attractions;
     QVector<QPushButton*>attractionButtons;
     QVector<TransportationRoute*>routes;
     QVector<QPushButton*>routesButtons;
+    QHash<int, Transportation*> transportationCache;
+
 
 //PARTICULAR BOOK
     QLabel *showPeriod;
@@ -134,7 +148,6 @@ private:
     QVector<int> idBookedRou;
 
 //HISTORY
-
     QLabel *historyLabel;
     QPushButton* historyButton;
     QVector<Trip*> trips;
@@ -152,8 +165,22 @@ private:
     QWidget* mainWidget=nullptr;
 
 
+    QMap<int, QLabel*> tripLabels;//unused at this moment
+    QMap<int, QLabel*> accLabels;//unused at this moment
+    QMap<int, QLabel*> attLabels;//unused at this moment
+    QMap<int, QLabel*> traLabels;
 
+    // search components
+    QLineEdit* searchAccEdit;
+    QLineEdit* searchAttEdit;
+    QLineEdit* searchRouEdit;
 
+    // search functions
+    void setupSearch();
+    void filterAccommodations(const QString& searchText);
+    void filterAttractions(const QString& searchText);
+    void filterRoutes(const QString& searchText);
+    QPushButton* customActionButton;
 
 };
 

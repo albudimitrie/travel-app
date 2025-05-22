@@ -10,9 +10,9 @@ IRequest* FactoryRequest::registerReq(QString username,QString password)
     return new RegisterRequest(username,password);
 }
 
-IRequest* FactoryRequest::logoutReq(QString username)
+IRequest* FactoryRequest::logoutReq(QString username,double balance)
 {
-    return new LogoutRequest(username);
+    return new LogoutRequest(username,balance);
 }
 
 IRequest* FactoryRequest::historyReq(QString username)

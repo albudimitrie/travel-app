@@ -73,11 +73,12 @@ void MainWindow::on_pushButton_clicked()
     QJsonObject obj = sock->receiveMessage();
     sock->sendMessage(ack->getRequest());
      //Verify with server
-    if (obj["status"]=="succesful"||username=="1")
+    if (obj["status"]=="succesful")
     {
+        double balance = obj["balance"].toDouble();
         //Create and open client window
         if(clientWin!=nullptr){ delete clientWin; clientWin=nullptr; }
-        clientWin = new clientWindow(nullptr,username);
+        clientWin = new clientWindow(nullptr,username,balance);
         connect(clientWin, &clientWindow::backToLogin, this, &MainWindow::show);
         QPropertyAnimation *animation = new QPropertyAnimation(clientWin, "windowOpacity");
         animation->setDuration(800);

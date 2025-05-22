@@ -7,8 +7,9 @@ class LogoutRequest : public IRequest
 {
 private:
     QString username="";
+    double balance=0;
 public:
-    LogoutRequest(QString username);
+    LogoutRequest(QString username,double balance);
     QByteArray getRequest()override;
 };
 

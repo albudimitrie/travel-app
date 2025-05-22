@@ -20,7 +20,7 @@ class FactoryRequest
 public:
     static IRequest* loginReq(QString username,QString password);
     static IRequest* registerReq(QString username,QString password);
-    static IRequest* logoutReq(QString username);
+    static IRequest* logoutReq(QString username,double balance);
     static IRequest* historyReq(QString username);
     static IRequest* accomodationReq(int id);
     static IRequest* numberaccommodationsReq();

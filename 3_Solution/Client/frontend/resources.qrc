@@ -12,5 +12,8 @@
         <file>assets/LOGO.png</file>
         <file>assets/clientMAIN.png</file>
         <file>assets/Internet.gif</file>
+        <file>assets/money.png</file>
+        <file>assets/money_resized.png</file>
+        <file>assets/search.png</file>
     </qresource>
 </RCC>

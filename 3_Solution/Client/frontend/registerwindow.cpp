@@ -5,7 +5,7 @@
 #include "factoryrequest.h"
 #include "Socket.h"
 #include <QTimer>
-#include"QPropertyAnimation"
+#include "QPropertyAnimation"
 
 registerWindow::registerWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -61,19 +61,20 @@ void registerWindow::on_pushButton_clicked()
 
     QJsonObject obj=sock->receiveMessage();
 
-    sock->sendMessage(ack->getRequest());
-
     if(obj["status"]=="succesful")
     {
         ui->label_3->setText("Registration successful!");
         ui->label_3->setStyleSheet("color: green;");
         ui->label_3->setVisible(true);
 
-        QTimer::singleShot(3000, this, [=](){
+        QTimer::singleShot(1500, this, [=](){
          ui->label_3->setVisible(false);
             this->hide();       // Hide register window
             emit backToLogin(); // Emit the signal to notify the login window to display
         });
+
+        sock->sendMessage(ack->getRequest());
+
     }
     else
     {

@@ -21,7 +21,7 @@ background-repeat: no-repeat;
 background-position: center;
 }</string>
    </property>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="frameLogo">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -562,6 +562,62 @@ QPushButton:pressed {
     </property>
     <property name="text">
      <string>BACK</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="walletBut">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>90</y>
+      <width>201</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #27ae60;         /* Verde fresh */
+    color: white;
+    font: bold 14px &quot;Segoe UI&quot;;
+    border: 2px solid #1e8449;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #2ecc71;         /* Verde mai deschis la hover */
+}
+
+QPushButton:pressed {
+    background-color: #1e8449;         /* Verde mai închis când e apăsat */
+}
+</string>
+    </property>
+    <property name="text">
+     <string>💵  My Wallet</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frameMoney">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>55</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/images/assets/money_resized.png);
+background-repeat: no-repeat;
+background-position: center;
+background-color: transparent;
+border: none;
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
     </property>
    </widget>
   </widget>

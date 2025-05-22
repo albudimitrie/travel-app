@@ -34,7 +34,9 @@ SOURCES += \
     transportation.cpp \
     transportationroute.cpp \
     trip.cpp \
-    tripsrequest.cpp
+    tripsrequest.cpp \
+    wallet.cpp \
+    walletdialog.cpp
 
 HEADERS += \
     Socket.h \
@@ -61,7 +63,9 @@ HEADERS += \
     transportation.h \
     transportationroute.h \
     trip.h \
-    tripsrequest.h
+    tripsrequest.h \
+    wallet.h \
+    walletdialog.h
 
 FORMS += \
     clientwindow.ui \

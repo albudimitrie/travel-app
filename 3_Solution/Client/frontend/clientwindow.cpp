@@ -27,12 +27,18 @@
 #include <QStandardItemModel>
 #include <QFormLayout>
 #include <QListWidget>
+#include <QLineEdit>
+#include <QIcon>
+#include <QAction>
 
 
-clientWindow::clientWindow(QWidget *parent,QString username)
+
+clientWindow::clientWindow(QWidget *parent,QString username,double balance)
     : QMainWindow(parent)
     , ui(new Ui::clientWindow)
 {
+
+    this->wallet = Wallet::getInstance(balance);
 
     this->loadDataFromServer();
 
@@ -66,6 +72,8 @@ clientWindow::clientWindow(QWidget *parent,QString username)
         font-weight: 600;
     }
 )");
+
+    walletBut = ui->walletBut;
 
     scrollAcc = ui->scrollAreaAccommodations;
     scrollAtt = ui->scrollAreaAttractions;
@@ -106,7 +114,6 @@ clientWindow::clientWindow(QWidget *parent,QString username)
     populateAccColumn(widAcc);
     populateAttColumn(widAtt);
     populateRouColumn(widTra);
-
 
     this->cancelButton = ui->cancelBut;
     cancelButton->hide();
@@ -183,11 +190,232 @@ clientWindow::clientWindow(QWidget *parent,QString username)
     autoBackButton->hide();
 
 
+    this->setupSearch();
+}
 
+
+void clientWindow::setupSearch()
+{
+    Socket* sock = Socket::getInstance();
+    IRequest *ack = FactoryRequest::ackReq();
+    int searchX = 1020;
+    int searchY = 50;
+    int searchWidth = 300;
+
+    this->customActionButton = new QPushButton("History", this);
+    customActionButton->setStyleSheet(R"(
+    QPushButton {
+        background-color: #007acc;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 12px;
+    }
+    QPushButton:hover {
+        background-color: #005f99;
+    }
+)");
+    customActionButton->move(searchX, searchY+40);
+    customActionButton->resize(150, 32);
+    customActionButton->hide();
+
+    connect(customActionButton, &QPushButton::clicked, this, [=]() {
+
+        IRequest *historyReq = FactoryRequest::historyReq(this->username);
+        sock->sendMessage(historyReq->getRequest());
+
+        QJsonObject obj = sock->receiveMessage();
+        qDebug() << obj;
+        qDebug() << "Butonul custom a fost apasat!";
+
+        QDialog* historyDialog = new QDialog(this);
+        historyDialog->setWindowTitle("Search History");
+        historyDialog->resize(400, 300);
+
+        // lista pt istoric
+        QListWidget* listWidget = new QListWidget(historyDialog);
+        listWidget->setGeometry(10, 10, 380, 240);
+
+        // adaug fiecare string
+        QJsonArray historyArray = obj["history"].toArray();
+        for (const QJsonValue& val : historyArray) {
+            listWidget->addItem(val.toString());
+        }
+
+        QPushButton* closeButton = new QPushButton("Închide", historyDialog);
+        closeButton->setGeometry(150, 260, 100, 30);
+        connect(closeButton, &QPushButton::clicked, historyDialog, &QDialog::accept);
+
+        historyDialog->exec();
+
+        sock->sendMessage(ack->getRequest());
+    });
+
+    QString searchStyle = R"(
+        QLineEdit {
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+            border: 2px solid #444444;
+            border-radius: 16px;
+            padding-left: 36px;
+            padding-right: 12px;
+            height: 36px;
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+        }
+        QLineEdit:hover {
+            border-color: #ffaa00;
+        }
+        QLineEdit:focus {
+            border-color: #ee0979;
+            background-color: #383838;
+        }
+        QLineEdit::placeholder {
+            color: #999999;
+            font-style: italic;
+        }
+    )";
+
+    auto createSearchLineEdit = [&](QWidget* parent, const QString& placeholder, int x, int y, int width) -> QLineEdit* {
+        QLineEdit* lineEdit = new QLineEdit(parent);
+        lineEdit->setPlaceholderText(placeholder);
+        lineEdit->setStyleSheet(searchStyle);
+        lineEdit->move(x, y);
+        lineEdit->resize(width, 36);
+
+        QPixmap iconPixmap(":/images/assets/search.png");
+        if (!iconPixmap.isNull()) {
+            QIcon icon(iconPixmap.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            QAction* searchAction = new QAction(icon, "", lineEdit);
+            lineEdit->addAction(searchAction, QLineEdit::LeadingPosition);
+        }
+
+        return lineEdit;
+    };
+
+    searchAccEdit = createSearchLineEdit(this, "Search accommodations...", searchX, searchY, searchWidth);
+    connect(searchAccEdit, &QLineEdit::returnPressed, this, [=]() {
+        filterAccommodations(searchAccEdit->text());
+        QJsonObject jsonObj;
+        jsonObj["username"]=username;
+        jsonObj["search"]=searchAccEdit->text();
+        jsonObj["type"]="accommodation";
+        jsonObj["action"]="ADD_SEARCH_CONTENT";
+
+        QJsonDocument doc(jsonObj);
+        QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
+        const char* jsonCharPtr = jsonData.constData();
+
+        qDebug() << jsonData;
+
+        Socket* sock = Socket::getInstance();
+        sock->sendMessage(jsonCharPtr);
+    });
+
+    searchAttEdit = createSearchLineEdit(this, "Search attractions...", searchX, searchY, searchWidth);
+    connect(searchAttEdit, &QLineEdit::returnPressed, this, [=]() {
+        filterAttractions(searchAttEdit->text());
+        QJsonObject jsonObj;
+        jsonObj["username"]=username;
+        jsonObj["search"]=searchAttEdit->text();
+        jsonObj["type"]="attraction";
+        jsonObj["action"]="ADD_SEARCH_CONTENT";
+
+        QJsonDocument doc(jsonObj);
+        QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
+        const char* jsonCharPtr = jsonData.constData();
+
+        qDebug() << jsonData;
+
+        Socket* sock = Socket::getInstance();
+        sock->sendMessage(jsonCharPtr);
+    });
+
+    searchRouEdit = createSearchLineEdit(this, "Search routes...", searchX, searchY, searchWidth);
+    connect(searchRouEdit, &QLineEdit::returnPressed, this, [=]() {
+        filterRoutes(searchRouEdit->text());
+        QJsonObject jsonObj;
+        jsonObj["username"]=username;
+        jsonObj["search"]=searchRouEdit->text();
+        jsonObj["type"]="routes";
+        jsonObj["action"]="ADD_SEARCH_CONTENT";
+
+        QJsonDocument doc(jsonObj);
+        QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
+        const char* jsonCharPtr = jsonData.constData();
+
+        qDebug() << jsonData;
+
+        Socket* sock = Socket::getInstance();
+        sock->sendMessage(jsonCharPtr);
+    });
+
+    searchAccEdit->hide();
+    searchAttEdit->hide();
+    searchRouEdit->hide();
+}
+
+void clientWindow::filterAccommodations(const QString& searchText)
+{
+    QVBoxLayout* layout = qobject_cast<QVBoxLayout*>(scrollAcc->widget()->layout());
+    if (!layout) return;
+
+    for (int i = 0; i < layout->count(); ++i)
+    {
+        QWidget* rowWidget = layout->itemAt(i)->widget();
+        if (!rowWidget) continue;
+
+        QLabel* label = rowWidget->findChild<QLabel*>();
+        if (!label) continue;
+
+        QString labelText = label->text();
+        bool match = labelText.contains(searchText, Qt::CaseInsensitive);
+        rowWidget->setVisible(match);
+    }
+}
+
+void clientWindow::filterAttractions(const QString& searchText)
+{
+    QVBoxLayout* layout = qobject_cast<QVBoxLayout*>(scrollAtt->widget()->layout());
+    if (!layout) return;
+
+    for (int i = 0; i < layout->count(); ++i)
+    {
+        QWidget* rowWidget = layout->itemAt(i)->widget();
+        if (!rowWidget) continue;
+
+        QLabel* label = rowWidget->findChild<QLabel*>();
+        if (!label) continue;
+
+        bool match = label->text().contains(searchText, Qt::CaseInsensitive);
+        rowWidget->setVisible(match);
+    }
+}
+
+void clientWindow::filterRoutes(const QString& searchText)
+{
+    QVBoxLayout* layout = qobject_cast<QVBoxLayout*>(scrollTra->widget()->layout());
+    if (!layout) return;
+
+    for (int i = 0; i < layout->count(); ++i)
+    {
+        QWidget* rowWidget = layout->itemAt(i)->widget();
+        if (!rowWidget) continue;
+
+        QLabel* label = rowWidget->findChild<QLabel*>();
+        if (!label) continue;
+
+        bool match = label->text().contains(searchText, Qt::CaseInsensitive);
+        rowWidget->setVisible(match);
+    }
 }
 
 clientWindow::~clientWindow()
 {
+    Wallet::destroyInstance();
+
     for (Accommodation* acc : accommodations) {
         if (acc) {
             delete acc;
@@ -325,7 +553,7 @@ void clientWindow::on_logout_clicked()
 
     IRequest *ack = FactoryRequest::ackReq();
 
-    IRequest *logoutReq = FactoryRequest::logoutReq(this->username);
+    IRequest *logoutReq = FactoryRequest::logoutReq(this->username,wallet->getBalance());
 
     Socket* sock = Socket::getInstance();
 
@@ -354,6 +582,10 @@ void clientWindow::on_pushAcc_clicked()
     scrollAtt->hide();
     scrollTra->hide();
     scrollAcc->show();
+
+    searchAccEdit->show();
+    searchAttEdit->hide();
+    searchRouEdit->hide();
 }
 
 void clientWindow::on_pushAtt_clicked()
@@ -369,6 +601,10 @@ void clientWindow::on_pushAtt_clicked()
     scrollAtt->show();
     scrollTra->hide();
     scrollAcc->hide();
+
+    searchAccEdit->hide();
+    searchAttEdit->show();
+    searchRouEdit->hide();
 }
 
 void clientWindow::on_pushTra_clicked()
@@ -384,57 +620,50 @@ void clientWindow::on_pushTra_clicked()
     scrollAtt->hide();
     scrollTra->show();
     scrollAcc->hide();
+
+    searchAccEdit->hide();
+    searchAttEdit->hide();
+    searchRouEdit->show();
 }
 
 void clientWindow::populateAccColumn(QWidget* widget)
 {
-    for(int i=0;i<accommodations.size();i++)
+    QVBoxLayout* vLayout = qobject_cast<QVBoxLayout*>(widget->layout());
+    if (!vLayout) return;
 
+    for (int i = 0; i < accommodations.size(); i++)
     {
+        // Container pe rand (widget)
+        QWidget* rowWidget = new QWidget();
+        QHBoxLayout* hLayout = new QHBoxLayout(rowWidget);
+        rowWidget->setLayout(hLayout);
 
-        QHBoxLayout* hLayout = new QHBoxLayout();
-
-        QVBoxLayout* vLayout = qobject_cast<QVBoxLayout*>(widget->layout());
-
-        if (vLayout) {
-
-            vLayout->addLayout(hLayout);
-
-        }
-
+        // Eticheta text
         QLabel* label = new QLabel();
-
+        accLabels[accommodations[i]->id()] = label;
         hLayout->addWidget(label);
 
-        Destination * dest = accommodations[i]->destination();
-
-        this->formatAccLabel(label,accommodations[i],dest);
-
-        //label->setAlignment(Qt::AlignCenter);
+        Destination* dest = accommodations[i]->destination();
+        this->formatAccLabel(label, accommodations[i], dest);
 
         label->setStyleSheet(R"(
-    QLabel {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 8px 16px;
-        font-weight: 600;
-
-    }
-)");
-
+            QLabel {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                padding: 8px 16px;
+                font-weight: 600;
+            }
+        )");
         label->setFixedSize(650, 300);
 
+        // Buton imagine
         QPushButton* button1 = new QPushButton();
-
         hLayout->addWidget(button1);
-
-        button1->setFixedSize(350,300);
+        button1->setFixedSize(350, 300);
 
         QString base64Data = accommodations[i]->base64Photo();
-
         QByteArray byteArray = base64Data.toUtf8();
-
         QByteArray imageData = QByteArray::fromBase64(byteArray);
 
         QPixmap pixmap;
@@ -442,42 +671,9 @@ void clientWindow::populateAccColumn(QWidget* widget)
 
         QIcon icon(pixmap.scaled(button1->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         button1->setIcon(icon);
-        button1->setIconSize(button1->size());
-        button1->setCursor(Qt::PointingHandCursor);
-
-        button1->setStyleSheet(R"(
-QPushButton {
-    background: #2e2e2e;
-    border-radius: 15px;
-    border: none;
-    padding: 0px;
-}
-)");
-        accommodationButtons.push_back(button1);
-
         button1->setIconSize(button1->size() - QSize(13, 13));
-
-        button1->setProperty("selected", false);
-
-
-        connect(button1, &QPushButton::clicked, this, [=]() {
-            bool isSelected = button1->property("selected").toBool();
-            isSelected = !isSelected;
-            button1->setProperty("selected", isSelected);
-
-            if (isSelected) {
-                button1->setStyleSheet(R"(
-            QPushButton {
-                background: #2e2e2e;
-                border-radius: 15px;
-                border: 8px solid green;
-                padding: 0px;
-            }
-        )");
-                idBookedAcc.push_back(accommodations[i]->id());
-            }
-            else {
-                button1->setStyleSheet(R"(
+        button1->setCursor(Qt::PointingHandCursor);
+        button1->setStyleSheet(R"(
             QPushButton {
                 background: #2e2e2e;
                 border-radius: 15px;
@@ -485,85 +681,91 @@ QPushButton {
                 padding: 0px;
             }
         )");
+
+        button1->setProperty("selected", false);
+        accommodationButtons.push_back(button1);
+
+        // Selectare
+        connect(button1, &QPushButton::clicked, this, [=]() {
+            bool isSelected = button1->property("selected").toBool();
+            isSelected = !isSelected;
+            button1->setProperty("selected", isSelected);
+
+            if (isSelected) {
+                button1->setStyleSheet(R"(
+                    QPushButton {
+                        background: #2e2e2e;
+                        border-radius: 15px;
+                        border: 8px solid green;
+                        padding: 0px;
+                    }
+                )");
+                idBookedAcc.push_back(accommodations[i]->id());
+            } else {
+                button1->setStyleSheet(R"(
+                    QPushButton {
+                        background: #2e2e2e;
+                        border-radius: 15px;
+                        border: none;
+                        padding: 0px;
+                    }
+                )");
                 idBookedAcc.removeOne(accommodations[i]->id());
             }
         });
 
+        vLayout->addWidget(rowWidget); // Adaug randul complet in layout
     }
 }
 
 void clientWindow::populateAttColumn(QWidget* widget)
 {
-    for(int i=0;i<attractions.size();i++)
+    QVBoxLayout* vLayout = qobject_cast<QVBoxLayout*>(widget->layout());
+    if (!vLayout) return;
 
+    for (int i = 0; i < attractions.size(); i++)
     {
-
-        QHBoxLayout* hLayout = new QHBoxLayout();
-
-        QVBoxLayout* vLayout = qobject_cast<QVBoxLayout*>(widget->layout());
-
-        if (vLayout) {
-
-            vLayout->addLayout(hLayout);
-
-        }
+        QWidget* rowWidget = new QWidget();
+        QHBoxLayout* hLayout = new QHBoxLayout(rowWidget);
+        rowWidget->setLayout(hLayout);
 
         QLabel* label = new QLabel();
+        Destination* dest = attractions[i]->destination();
+        this->formatAttLabel(label, attractions[i], dest);
+        label->setFixedSize(650, 300);
+        label->setStyleSheet(R"(
+            QLabel {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                padding: 8px 16px;
+                font-weight: 600;
+            }
+        )");
 
         hLayout->addWidget(label);
-
-        Destination * dest = attractions[i]->destination();
-
-        this->formatAttLabel(label,attractions[i],dest);
-
-        //label->setAlignment(Qt::AlignCenter);
-
-        label->setStyleSheet(R"(
-    QLabel {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 8px 16px;
-        font-weight: 600;
-
-    }
-)");
-
-        label->setFixedSize(650, 300);
+        attLabels[attractions[i]->id()] = label;
 
         QPushButton* button1 = new QPushButton();
+        button1->setFixedSize(350, 300);
 
-        hLayout->addWidget(button1);
-
-        button1->setFixedSize(350,300);
-
-        QString base64Data = attractions[i]->base64Photo();
-
-        QByteArray byteArray = base64Data.toUtf8();
-
-        QByteArray imageData = QByteArray::fromBase64(byteArray);
-
+        QByteArray byteArray = QByteArray::fromBase64(attractions[i]->base64Photo().toUtf8());
         QPixmap pixmap;
-        pixmap.loadFromData(imageData);
-
-        QIcon icon(pixmap.scaled(button1->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        button1->setIcon(icon);
-        button1->setIconSize(button1->size());
+        pixmap.loadFromData(byteArray);
+        button1->setIcon(QIcon(pixmap.scaled(button1->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation)));
+        button1->setIconSize(button1->size() - QSize(13, 13));
         button1->setCursor(Qt::PointingHandCursor);
 
         button1->setStyleSheet(R"(
-QPushButton {
-    background: #2e2e2e;
-    border-radius: 15px;
-    border: none;
-    padding: 0px;
-}
-)");
-        attractionButtons.push_back(button1);
-
-        button1->setIconSize(button1->size() - QSize(13, 13));
-
+            QPushButton {
+                background: #2e2e2e;
+                border-radius: 15px;
+                border: none;
+                padding: 0px;
+            }
+        )");
         button1->setProperty("selected", false);
+        attractionButtons.push_back(button1);
 
         connect(button1, &QPushButton::clicked, this, [=]() {
             bool isSelected = button1->property("selected").toBool();
@@ -572,78 +774,96 @@ QPushButton {
 
             if (isSelected) {
                 button1->setStyleSheet(R"(
-            QPushButton {
-                background: #2e2e2e;
-                border-radius: 15px;
-                border: 8px solid green;
-                padding: 0px;
-            }
-        )");
+                    QPushButton {
+                        background: #2e2e2e;
+                        border-radius: 15px;
+                        border: 8px solid green;
+                        padding: 0px;
+                    }
+                )");
                 idBookedAtt.push_back(attractions[i]->id());
-            }
-            else {
+            } else {
                 button1->setStyleSheet(R"(
-            QPushButton {
-                background: #2e2e2e;
-                border-radius: 15px;
-                border: none;
-                padding: 0px;
-            }
-        )");
+                    QPushButton {
+                        background: #2e2e2e;
+                        border-radius: 15px;
+                        border: none;
+                        padding: 0px;
+                    }
+                )");
                 idBookedAtt.removeOne(attractions[i]->id());
             }
         });
 
+        hLayout->addWidget(button1);
+        vLayout->addWidget(rowWidget);
     }
 }
 
 void clientWindow::populateRouColumn(QWidget* widget)
 {
-    for(int i=0;i<routes.size();i++)
+    QVBoxLayout* vLayout = qobject_cast<QVBoxLayout*>(widget->layout());
+    if (!vLayout) return;
 
+    for (int i = 0; i < routes.size(); i++)
     {
-
-        QHBoxLayout* hLayout = new QHBoxLayout();
-
-        QVBoxLayout* vLayout = qobject_cast<QVBoxLayout*>(widget->layout());
-
-        if (vLayout) {
-
-            vLayout->addLayout(hLayout);
-
-        }
+        QWidget* rowWidget = new QWidget();
+        QHBoxLayout* hLayout = new QHBoxLayout(rowWidget);
+        rowWidget->setLayout(hLayout);
 
         QLabel* label = new QLabel();
 
+        TransportationRoute* route = routes[i];
+        Transportation* transport = route->getTransport();
+
+        QString labelText = QString(
+                                "ID: %1\n"
+                                "Plecare: %2\n"
+                                "Sosire: %3\n"
+                                "Distanță: %4 km\n"
+                                "Durată: %5 min\n\n"
+                                "Transport:\n"
+                                "Tip: %6\n"
+                                "Companie: %7\n"
+                                "Descriere: %8\n"
+                                "Confort: %9\n"
+                                "Capacitate: %10\n"
+                                "Preț mediu: %11 lei"
+                                )
+                                .arg(route->getId())
+                                .arg(route->getDeparture())
+                                .arg(route->getArrival())
+                                .arg(route->getDistance())
+                                .arg(route->getDuration())
+                                .arg(transport->getType())
+                                .arg(transport->getCompany())
+                                .arg(transport->getDescription())
+                                .arg(transport->getComfortLevel())
+                                .arg(transport->getCapacity())
+                                .arg(transport->getAveragePricePerTrip(), 0, 'f', 2);
+
+        label->setText(labelText);
+        label->setFixedSize(650, 300);
+        label->setStyleSheet(R"(
+            QLabel {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                padding: 8px 16px;
+                font-weight: 600;
+                white-space: pre-wrap;
+            }
+        )");
+
         hLayout->addWidget(label);
 
-        this->formatRouLabel(label,routes[i]);
-
-        //label->setAlignment(Qt::AlignCenter);
-
-        label->setStyleSheet(R"(
-    QLabel {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 8px 16px;
-        font-weight: 600;
-
-    }
-)");
-
-        label->setFixedSize(650, 300);
+        traLabels[route->getId()] = label;
 
         QPushButton* button1 = new QPushButton();
+        button1->setFixedSize(350, 300);
 
-        hLayout->addWidget(button1);
-
-        button1->setFixedSize(350,300);
-
-        QString base64Data = routes[i]->getTransport()->base64Photo();
-
+        QString base64Data = transport->base64Photo();
         QByteArray byteArray = base64Data.toUtf8();
-
         QByteArray imageData = QByteArray::fromBase64(byteArray);
 
         QPixmap pixmap;
@@ -651,22 +871,20 @@ void clientWindow::populateRouColumn(QWidget* widget)
 
         QIcon icon(pixmap.scaled(button1->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         button1->setIcon(icon);
-        button1->setIconSize(button1->size());
+        button1->setIconSize(button1->size() - QSize(13, 13));
         button1->setCursor(Qt::PointingHandCursor);
 
         button1->setStyleSheet(R"(
-QPushButton {
-    background: #2e2e2e;
-    border-radius: 15px;
-    border: none;
-    padding: 0px;
-}
-)");
-        routesButtons.push_back(button1);
-
-        button1->setIconSize(button1->size() - QSize(13, 13));
+            QPushButton {
+                background: #2e2e2e;
+                border-radius: 15px;
+                border: none;
+                padding: 0px;
+            }
+        )");
 
         button1->setProperty("selected", false);
+        routesButtons.push_back(button1);
 
         connect(button1, &QPushButton::clicked, this, [=]() {
             bool isSelected = button1->property("selected").toBool();
@@ -675,29 +893,29 @@ QPushButton {
 
             if (isSelected) {
                 button1->setStyleSheet(R"(
-            QPushButton {
-                background: #2e2e2e;
-                border-radius: 15px;
-                border: 8px solid green;
-                padding: 0px;
-            }
-        )");
-                idBookedRou.push_back(routes[i]->getId());
-            }
-            else {
+                    QPushButton {
+                        background: #2e2e2e;
+                        border-radius: 15px;
+                        border: 8px solid green;
+                        padding: 0px;
+                    }
+                )");
+                idBookedRou.push_back(route->getId());
+            } else {
                 button1->setStyleSheet(R"(
-            QPushButton {
-                background: #2e2e2e;
-                border-radius: 15px;
-                border: none;
-                padding: 0px;
-            }
-        )");
-                idBookedRou.removeOne(routes[i]->getId());
-
+                    QPushButton {
+                        background: #2e2e2e;
+                        border-radius: 15px;
+                        border: none;
+                        padding: 0px;
+                    }
+                )");
+                idBookedRou.removeOne(route->getId());
             }
         });
 
+        hLayout->addWidget(button1);
+        vLayout->addWidget(rowWidget);
     }
 }
 
@@ -712,7 +930,6 @@ void clientWindow::loadDataFromServer()
     sock->sendMessage(numberacc->getRequest());
 
     QJsonObject object = sock->receiveMessage();
-
 
     int sizeAcc = object["size"].toInt();
      //qDebug() << n;
@@ -817,32 +1034,55 @@ void clientWindow::loadDataFromServer()
     //qDebug() << rouVec;
     QJsonArray routesArray = rouVec["routes"].toArray();
     sock->sendMessage(ack->getRequest());
-    for (const QJsonValue &val : routesArray) {
+
+    for (const QJsonValue &val : routesArray)
+    {
         QJsonObject obj = val.toObject();
 
-        Transportation *tra = new Transportation(obj["TransportationID"].toInt(),obj["Type"].toString(),obj["Company"].toString(),
-                                            obj["Description"].toString(),obj["ComfortLevel"].toString(),obj["Capacity"].toInt(),
-                                            obj["PricePerKm"].toDouble());
+        int traId = obj["TransportationID"].toInt();
+        Transportation* tra = nullptr;
 
-        TransportationRoute* rou = new TransportationRoute(obj["RouteID"].toInt(),obj["CityDeparture"].toString(),obj["CityArrival"].toString(),
-                                                           obj["Distance"].toInt(),obj["Duration"].toInt(),tra);
+        // verific daca transportul exista deja in cache
+        if (transportationCache.contains(traId))
+        {
+            tra = transportationCache[traId];
+        }
+        else
+        {
+            tra = new Transportation(traId,
+                                     obj["Type"].toString(),
+                                     obj["Company"].toString(),
+                                     obj["Description"].toString(),
+                                     obj["ComfortLevel"].toString(),
+                                     obj["Capacity"].toInt(),
+                                     obj["PricePerKm"].toDouble());
 
+            transportationCache.insert(traId, tra);
 
-        IRequest* getTraPhoto = FactoryRequest::phototransportationReq(tra->getId());
-        sock->sendMessage(getTraPhoto->getRequest());
+            // cer poza doar daca transportul nu a fost procesat anterior
+            IRequest* getTraPhoto = FactoryRequest::phototransportationReq(tra->getId());
+            sock->sendMessage(getTraPhoto->getRequest());
 
-        QJsonObject sizeTraObj = sock->receiveMessage();
-        int sizeTraPhoto = sizeTraObj["size"].toInt();
+            QJsonObject sizeTraObj = sock->receiveMessage();
+            int sizeTraPhoto = sizeTraObj["size"].toInt();
 
-        QString photo="";
-        sock->sendMessage(ack->getRequest());
-        QJsonObject photoObj = sock->receiveBigData(sizeTraPhoto);
-        photo.append(photoObj["encoded"].toString());
+            QString photo = "";
+            sock->sendMessage(ack->getRequest());
+            QJsonObject photoObj = sock->receiveBigData(sizeTraPhoto);
+            photo.append(photoObj["encoded"].toString());
 
-        //qDebug() <<"SIZEUL: "<< photo.size();
-        tra->setBase64Photo(photo);
+            tra->setBase64Photo(photo);
+            sock->sendMessage(ack->getRequest());
+        }
 
-        sock->sendMessage(ack->getRequest());
+        TransportationRoute* rou = new TransportationRoute(
+            obj["RouteID"].toInt(),
+            obj["CityDeparture"].toString(),
+            obj["CityArrival"].toString(),
+            obj["Distance"].toInt(),
+            obj["Duration"].toInt(),
+            tra
+            );
 
         routes.push_back(rou);
     }
@@ -1050,6 +1290,8 @@ void clientWindow::on_bookBut_clicked()
 {
     if(canBook)
     {
+    searchAccEdit->show();
+    customActionButton->show();
     scrollAcc->show();
     butAcc->show();
     butAtt->show();
@@ -1152,6 +1394,13 @@ void clientWindow::verify_day()
 
 void clientWindow::finish_booking()
 {
+    filterAccommodations("");
+    filterAttractions("");
+    filterRoutes("");
+    customActionButton->hide();
+    searchAccEdit->hide();
+    searchAttEdit->hide();
+    searchRouEdit->hide();
     QLabel* bigLabel = new QLabel(this);
     bigLabel->setText("✈️ Planificarea e gata! ✈️");
 
@@ -1343,6 +1592,19 @@ void clientWindow::clearHighlightedDates(){
 void clientWindow::on_cancelBut_clicked()
 {
     //reset stage
+    customActionButton->hide();
+    filterAccommodations("");
+    filterAttractions("");
+    filterRoutes("");
+    //hide search bars
+    searchAccEdit->hide();
+    searchAttEdit->hide();
+    searchRouEdit->hide();
+
+    //reset search text
+    searchAccEdit->clear();
+    searchAttEdit->clear();
+    searchRouEdit->clear();
 
     bool isOn = butAcc->isChecked();
     if(isOn==false)
@@ -1519,6 +1781,8 @@ void clientWindow::populateTripColumn(QWidget* widget)
         hLayout->addWidget(label);
 
         Trip* trip = trips[i];
+
+        tripLabels[trip->getTripId()] = label;
 
         QString labelText = QString(
                                 "Trip ID: %1\nStart Date: %2\nEnd Date: %3\nDuration: %4 days\nConfirmed: %5\nTotal Cost: %6 €")
@@ -1815,8 +2079,27 @@ void clientWindow::showTripDetails(Trip* trip)
         int ret = confirmBox.exec();
 
         if (ret == QMessageBox::Yes) {
+
+            double bal = wallet->getBalance();
+            if(bal>=trip->getTotalCost())
+            {
+                wallet->dischargeBalance(trip->getTotalCost());
+            }
+            else
+            {
+                QMessageBox::information(dialog, "Error", "Nu detii suficiente fonduri in portofel!");
+                return;
+            }
+
             // Setarea calatoriei ca fiind confirmata
             trip->setIsConfirmed(true);
+
+
+            if (tripLabels.contains(trip->getTripId())) {
+                formatTripLabel(tripLabels[trip->getTripId()], trip);
+            }
+
+
 
             //trimitere si la server
             QJsonObject sendConfirmObj;
@@ -1839,6 +2122,12 @@ void clientWindow::showTripDetails(Trip* trip)
                 "<b>Confirmed:</b> Yes<br>"
                 );
             generalInfo->setText(newInfoText);
+
+            confirmButton->setText("Already Confirmed");
+            confirmButton->setStyleSheet(R"(
+        QPushButton {
+            background-color: )" + QString(trip->getIsConfirmed() ? "#808080" : "#2196F3") + R"(;
+        )");
 
             QMessageBox::information(dialog, "Success", "Trip has been confirmed successfully!");
         }
@@ -2283,6 +2572,12 @@ void clientWindow::showGeneratedTripDetails(Trip* trip)
                 );
             generalInfo->setText(newInfoText);
 
+            confirmButton->setText("Already Added");
+            confirmButton->setStyleSheet(R"(
+        QPushButton {
+            background-color: )" + QString(trip->getIsAdded() ? "#808080" : "#2196F3") + R"(;
+        )");
+
             QMessageBox::information(dialog, "Success", "Trip has been added successfully!");
         }
     });
@@ -2515,7 +2810,7 @@ void clientWindow::on_autoBut_clicked()
             if (departureCity.isEmpty()) departureCity = "Any";
             if (country.isEmpty()) country = "Any";
 
-            // QJsonObject formatat
+            // obj formatat
             QJsonObject jsonObj;
             jsonObj["username"]= username;
             jsonObj["Country"] = country;
@@ -2611,3 +2906,8 @@ void clientWindow::on_autoBackBut_clicked()
 
 }
 
+void clientWindow::on_walletBut_clicked()
+{
+    WalletDialog dialog(this,wallet);
+    dialog.exec();
+}
